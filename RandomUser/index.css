@@ -1,0 +1,309 @@
+body
+{
+    background-color: #f9f9f9;
+    font-family: Ubuntu;
+    transition: all .25s ease-in-out;
+    position: relative;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#wrapper
+{
+    width: 100%;
+}
+
+#currentProfile
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Ubuntu;
+    font-style: italic;
+}
+
+.scheda
+{
+    position: relative;
+    padding: 20px 0;
+    width: 100%;
+    background: #bbbbbb;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(0,0,0,.5);
+    overflow: hidden;
+    text-align: center;
+    z-index: 5;
+}
+
+.scheda .fotoUtente
+{
+    position: relative;
+    background: #fff;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+
+.scheda #valore
+{
+    margin: 0;
+    font-size: 32px;
+    text-align: center;
+    width: 100%;
+}
+
+.values_list
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+}
+
+.horizontal_center
+{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scheda #titolo
+{
+    color: #555;
+    font-size: 18px;
+    margin: 0;
+}
+
+#header h1
+{
+    font-family: Ubuntu;
+    margin: 0;
+    padding-top: 50px;
+    font-size: 48px;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+#header
+{
+    width: 100%;
+    height: 500px;
+    background: #2c2e31;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+
+h1
+{
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    font-weight: bold;
+}
+
+p
+{
+    text-align: center;
+}
+
+#resultsNumber
+{
+    display: inline-block;
+    width: 100%;
+    margin:0 auto;
+}
+
+#divBar
+{
+    width: 20%;
+    margin: 0 auto;
+}
+
+#pResults
+{
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#divRadio
+{
+    width: 13%;
+    margin: 0 auto;
+}
+
+#divRadio input
+{
+    width: 10%;
+    margin: 0 auto;
+    display: inline;
+}
+
+#divRadio p
+{
+    width: 10%;
+    display: inline;
+}
+
+#divNat
+{
+    margin: 0 auto;
+    width: 25%;
+}
+
+#contenitore
+{
+    border: 1px solid black;
+}
+
+#indietro
+{
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url("frecciaIndietroGrigia.jpg");
+    background-position: center;
+    background-size: contain;
+    vertical-align: middle;
+    outline: none;
+}
+
+#avanti
+{
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url("frecciaAvantiGrigia.jpg");
+    background-position: center;
+    background-size: contain;
+    vertical-align: middle;
+    outline: none;
+}
+
+#btnOk
+{
+    margin: 0 auto;
+    display: block;
+}
+
+/*li*/
+#valuesList li
+{
+    width: 40px;
+    height: 48px;
+    margin: 20px;
+    display: inline-block;
+    background-image: url("card_icons.png");
+    background-size: 378px;
+    background-position-y: -48px;
+    transition: all .25s ease-out;
+}
+
+
+#valuesList li:nth-of-type(1)
+{
+	background-position-x: 0;
+}
+
+#valuesList li:nth-of-type(2)
+{
+    background-position-x: -68px;
+}
+
+#valuesList li:nth-of-type(3)
+{
+    background-position-x: -135px;
+}
+
+#valuesList li:nth-of-type(4)
+{
+    background-position-x: -203px;
+}
+
+#valuesList li:nth-of-type(5)
+{
+    background-position-x: -270px;
+}
+
+#valuesList li:nth-of-type(6)
+{
+    background-position-x: -338px;
+}
+
+/*ul*/
+ul
+{
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.values_list
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+}
+.horizontal_center
+{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#valuesList
+{
+    margin: 0 auto;
+}
+
+#immagine
+{
+    border: 1px solid #AAAAAA;
+    width: 128px;
+    height: 128px;
+}
+
+/*input[type=range]*/
+input[type=range]
+{
+    width: 100%;
+    display: inline-block;
+    margin: 0 auto;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track
+{
+    background: #DDDDDD;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-thumb
+{
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #000000;
+    margin-top: -4px;
+}
+
+input[type=range]:focus
+{
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track
+{
+    background: #CCCCCC;
+}

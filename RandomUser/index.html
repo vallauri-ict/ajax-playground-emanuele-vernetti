@@ -1,0 +1,69 @@
+<html> <!--documento HTML5-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html">
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <title>Random User Generator</title>
+</head>
+
+<body>
+<div id="wrapper">
+  <div id="header">
+    <h3 align="center">Creato da: VERNETTI EMANUELE</h3>
+    <h1 align="center">RANDOM USER GENERATOR</h1>
+    <p>A free, open-source API for generating random user data. Like Lorem Ipsum, but for people.</p>
+    <h3 align="center">Numero di profili richiesti: <p id="pResults">1</p> </h3>
+    <div id="divBar">
+    <input type="range" id="resultsNumber" min="1" max="50" value="1" step="1">
+      <br><br>
+
+    </div>
+    <div id="divRadio">
+      <br>
+      <p align="center">Genere:</p> <br><br>
+      <p>Uomo</p><input type="radio" name="rtbGenere" value="male">
+      <p>Donna</p><input type="radio" name="rtbGenere" value="female">
+      <p>Entrambi</p><input type="radio" name="rtbGenere" value="" checked="true">
+    </div>
+    <div id="divNat">
+      <br>
+      Nazionalità:
+      <input type="checkbox" value="gb">GB
+      <input type="checkbox" value="au">AU
+      <input type="checkbox" value="de">DE
+      <input type="checkbox" value="ie">IE
+      <input type="checkbox" value="ir">IR
+      <input type="checkbox" value="br">BR
+      <input type="checkbox" value="ca">CA
+    <br><br>
+    <input type="button" id="btnOk" value="GENERATE">
+    </div>
+</div>
+  <div id="contenitore">
+    <br>
+    <div class="scheda">
+      <div>
+        <input type="button" class="divMove" id="indietro">
+        <img id="immagine">
+        <input type="button" class="divMove" id="avanti">
+        <div id="fotoUtente">
+          <p id="titolo"></p>
+          <p id="valore"></p>
+        </div>
+      </div>
+      <ul id="valuesList">
+        <li value="0"></li>
+        <li value="1"></li>
+        <li value="2"></li>
+        <li value="3"></li>
+        <li value="4"></li>
+        <li value="5"></li>
+      </ul>
+      <div id="currentProfile"></div>
+    </div>
+  </div>
+</body>
+</html>

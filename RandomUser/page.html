@@ -1,0 +1,647 @@
+<html> <!--documento HTML5-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html">
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="application/javascript">
+  let n,gender,nationality;
+let currentPos;
+let json;
+let _indietro,_avanti,_ulInfo,_titolo,_valore,_immagine,_pResults,_resultsNumber,_currentProfile;
+$(function()
+{
+    //#region ACCESSO AI CONTROLLI HTML CON I PUNTATORI
+    _indietro=$("#indietro");
+    _avanti=$("#avanti");
+    _ulInfo=$("#valuesList");
+    _titolo=$("#titolo");
+    _valore=$("#valore");
+    _immagine=$("#immagine");
+    _pResults=$("#pResults");
+    _resultsNumber=$("#resultsNumber");
+    _currentProfile=$("#currentProfile");
+    //#endregion
+    _resultsNumber.on("input",function ()
+    {
+       _pResults.text(_resultsNumber.val());
+    });
+    _indietro.prop("disabled","true");
+    _avanti.prop("disabled","true");
+    $("#btnOk").click(function()
+    {
+        resetButtons();
+        resetInfo();
+        let param;
+        n=parseInt(_resultsNumber.val());
+        gender=$("#divRadio input:checked").val();
+        nationality=$("#lstNazioni").val();
+        if(nationality=="")
+        {
+            nationality="Tutte le nazionalità disponibili";
+        }
+        if(gender=="")
+        {
+            gender="Entrambi i generi";
+        }
+        param="results="+n+"&gender="+gender+"&nat="+nationality;
+        inviaRichiesta(param, aggiornaPagina);
+        _indietro.on("click",indietro).prop("disabled","true");
+        _avanti.on("click",avanti);
+        if(n==1)
+        {
+            _avanti.prop("disabled","disabled");
+        }
+        else
+        {
+            _avanti.removeProp("disabled");
+            _avanti.css({
+                "background-image":"url(frecciaAvanti.jpg)"
+            });
+        }
+        for(let i=1;i<=6;i++)
+        {
+            _ulInfo.children("li").eq(i-1).on("mouseover",function ()
+            {
+                visualizza(i);
+            })
+        }
+        currentPos=0;
+        _ulInfo.children("li").eq(0).css({
+            "background-position-y":"-95px"
+        });
+    });
+});
+
+function inviaRichiesta(parametri, callBack)
+{
+    alert(
+        "Risultati richiesti: "+n+"\n"+
+        "Genere: "+gender+"\n"+
+        "Nazionalità: "+nationality
+    );
+    if(nationality=="Tutte le nazionalità disponibili")
+    {
+        nationality="";
+    }
+    if(gender=="Entrambi i generi")
+    {
+        gender="";
+    }
+    $.ajax({
+        "url": "https://randomuser.me/api", //default: currentPage
+        "type": "GET",
+        "data": parametri,
+        "contentType": "application/x-www-form-urlencoded; charset=UTF-8",
+        "dataType": "json",
+        "async": true, // default
+        "timeout": 5000,
+        "success": callBack,
+        "error": function(jqXHR)
+        {
+            alert("Server Error: " + jqXHR.status + " - " + jqXHR.responseText);
+        }
+    });
+}
+
+function aggiornaPagina(data)
+{
+    json=data;
+    console.log(json);
+    let person = data.results[0];
+    let st = person.name.title + " " + person.name.first + " " + person.name.last;
+    _titolo.html("Hi, my name is");
+    _valore.html(st);
+    _immagine.attr("src", person.picture.large);
+    _currentProfile.text("Profilo 1 di "+n);
+}
+
+function indietro()
+{
+    currentPos--;
+    _avanti.removeProp("disabled");
+    _avanti.css({
+        "background-image":"url(frecciaAvanti.jpg)"
+    });
+    if(currentPos==0)
+    {
+        _indietro.prop("disabled","disabled");
+        _indietro.css({
+            "background-image":"url(frecciaIndietroGrigia.jpg)"
+        });
+    }
+    newUser();
+    _currentProfile.text("Profilo "+(currentPos+1)+" di "+n);
+}
+
+function newUser()
+{
+    _valore.html(json["results"][currentPos]["name"]["title"]+" "+json["results"][currentPos]["name"]["first"]+" "+json["results"][currentPos]["name"]["last"]);
+    _titolo.html("Hi, my name is");
+    _immagine.attr("src", json["results"][currentPos]["picture"]["large"]);
+}
+
+function avanti()
+{
+    currentPos++;
+    _indietro.removeProp("disabled");
+    _indietro.css({
+        "background-image":"url(frecciaIndietro.jpg)"
+    });
+    if(currentPos==(n-1))
+    {
+        _avanti.prop("disabled","disabled");
+        _avanti.css({
+            "background-image":"url(frecciaAvantiGrigia.jpg)"
+        });
+    }
+    newUser();
+    resetInfo();
+    imposta(1);
+    _currentProfile.text("Profilo "+(currentPos+1)+" di "+n);
+}
+
+function visualizza(n)
+{
+    resetInfo();
+    switch (n)
+    {
+        case 1:
+        {
+            //nome e cognome
+            _valore.html(json["results"][currentPos]["name"]["title"]+" "+json["results"][currentPos]["name"]["first"]+" "+json["results"][currentPos]["name"]["last"]);
+            _titolo.html("Hi, my name is");
+            imposta(n);
+            break;
+        }
+        case 2:
+        {
+            //mail
+            _valore.html(json["results"][currentPos]["email"]);
+            _titolo.html("My email address is");
+            imposta(n);
+            break;
+
+        }
+        case 3:
+        {
+            //compleanno
+            let s=json["results"][currentPos]["dob"]["date"].substr(0,10);
+            let giorno,mese,anno;
+            giorno=s.substring(8,10);
+            mese=s.substring(5,7);
+            anno=s.substring(0,4);
+            _valore.html(giorno+"/"+mese+"/"+anno);
+            _titolo.html("My birthday is");
+            imposta(n);
+            break;
+
+        }
+        case 4:
+        {
+            //indirizzo
+            _valore.html(json["results"][currentPos]["location"]["postcode"]+" "+json["results"][currentPos]["location"]["city"]+" "+json["results"][currentPos]["location"]["state"]);
+            _titolo.html("My address is");
+            imposta(n);
+            break;
+        }
+        case 5:
+        {
+            //numero di telefono
+            _valore.html(json["results"][currentPos]["phone"]);
+            _titolo.html("My phone number is");
+            imposta(n);
+            break;
+        }
+        case 6:
+        {
+            //password
+            _valore.html(json["results"][currentPos]["login"]["password"]);
+            _titolo.html("My password is");
+            imposta(n);
+            break;
+        }
+    }
+}
+
+function resetInfo()
+{
+    _ulInfo.children("li").css({
+        "background-position-y":"-48px"
+    });
+}
+
+function resetButtons()
+{
+    _indietro.off();
+    _avanti.off();
+    _indietro.css({
+        "background-image":"url(frecciaIndietroGrigia.jpg)"
+    });
+    _avanti.css({
+        "background-image":"url(frecciaAvantiGrigia.jpg)"
+    });
+}
+
+function imposta(n)
+{
+    _ulInfo.children("li").eq(n-1).css({
+        "cursor":"pointer",
+        "background-position-y":"-96px"
+    });
+}
+  </script>
+  <link rel="stylesheet" href="index.css">
+  <title>Random User Generator</title>
+  <style>
+  body
+{
+    background-color: #f9f9f9;
+    font-family: Ubuntu;
+    transition: all .25s ease-in-out;
+    position: relative;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#wrapper
+{
+    width: 100%;
+}
+
+#currentProfile
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: Ubuntu;
+    font-style: italic;
+}
+
+.scheda
+{
+    position: relative;
+    padding: 20px 0;
+    width: 100%;
+    background: #bbbbbb;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(0,0,0,.5);
+    overflow: hidden;
+    text-align: center;
+    z-index: 5;
+}
+
+.scheda .fotoUtente
+{
+    position: relative;
+    background: #fff;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+
+.scheda #valore
+{
+    margin: 0;
+    font-size: 32px;
+    text-align: center;
+    width: 100%;
+}
+
+.values_list
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+}
+
+.horizontal_center
+{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scheda #titolo
+{
+    color: #555;
+    font-size: 18px;
+    margin: 0;
+}
+
+#header h1
+{
+    font-family: Ubuntu;
+    margin: 0;
+    padding-top: 50px;
+    font-size: 48px;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+#header
+{
+    width: 100%;
+    height: 500px;
+    background: #2c2e31;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+
+h1
+{
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    font-weight: bold;
+}
+
+p
+{
+    text-align: center;
+}
+
+#lstNazioni
+{
+    margin-top: 5%;
+}
+
+#resultsNumber
+{
+    display: inline-block;
+    width: 100%;
+    margin:0 auto;
+}
+
+#divBar
+{
+    width: 20%;
+    margin: 0 auto;
+}
+
+#pResults
+{
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#divRadio
+{
+    width: 13%;
+    margin: 0 auto;
+}
+
+#divRadio input
+{
+    width: 10%;
+    margin: 0 auto;
+    display: inline;
+}
+
+#divRadio p
+{
+    width: 10%;
+    display: inline;
+}
+
+#divNat
+{
+    margin: 0 auto;
+    width: 10%;
+}
+
+#contenitore
+{
+    width: 100%;
+    margin: 0 auto;
+}
+
+#indietro
+{
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url("frecciaIndietroGrigia.jpg");
+    background-position: center;
+    background-size: contain;
+    vertical-align: middle;
+    outline: none;
+}
+
+#avanti
+{
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url("frecciaAvantiGrigia.jpg");
+    background-position: center;
+    background-size: contain;
+    vertical-align: middle;
+    outline: none;
+}
+
+#btnOk
+{
+    margin: 0 auto;
+    display: block;
+}
+
+/*li*/
+#valuesList li
+{
+    width: 40px;
+    height: 48px;
+    margin: 20px;
+    display: inline-block;
+    background-image: url("card_icons.png");
+    background-size: 378px;
+    background-position-y: -48px;
+    transition: all .25s ease-out;
+}
+
+
+#valuesList li:nth-of-type(1)
+{
+	background-position-x: 0;
+}
+
+#valuesList li:nth-of-type(2)
+{
+    background-position-x: -68px;
+}
+
+#valuesList li:nth-of-type(3)
+{
+    background-position-x: -135px;
+}
+
+#valuesList li:nth-of-type(4)
+{
+    background-position-x: -203px;
+}
+
+#valuesList li:nth-of-type(5)
+{
+    background-position-x: -270px;
+}
+
+#valuesList li:nth-of-type(6)
+{
+    background-position-x: -338px;
+}
+
+/*ul*/
+ul
+{
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.values_list
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+}
+.horizontal_center
+{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#valuesList
+{
+    margin: 0 auto;
+}
+
+#immagine
+{
+    border: 1px solid #AAAAAA;
+    width: 128px;
+    height: 128px;
+}
+
+/*input[type=range]*/
+input[type=range]
+{
+    width: 100%;
+    display: inline-block;
+    margin: 0 auto;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track
+{
+    background: #DDDDDD;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-thumb
+{
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #000000;
+    margin-top: -4px;
+}
+
+input[type=range]:focus
+{
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track
+{
+    background: #CCCCCC;
+}
+ </style>
+</head>
+
+<body>
+<div id="wrapper">
+  <div id="header">
+    <h3 align="center">EMANUELE VERNETTI 4B INF</h3>
+    <h1 align="center">RANDOM USER GENERATOR</h1>
+    <p>A free, open-source API for generating random user data. Like Lorem Ipsum, but for people.</p>
+    <h3 align="center">Numero di profili richiesti: <p id="pResults">1</p> </h3>
+    <div id="divBar">
+    <input type="range" id="resultsNumber" min="1" max="50" value="1" step="1">
+      <br><br>
+
+    </div>
+    <div id="divRadio">
+      <br>
+      <p align="center">Genere:</p> <br><br>
+      <p>Uomo</p><input type="radio" name="rtbGenere" value="male">
+      <p>Donna</p><input type="radio" name="rtbGenere" value="female">
+      <p>Entrambi</p><input type="radio" name="rtbGenere" value="" checked="true">
+    </div>
+    <div id="divNat">
+      <br>
+      Nazionalità:
+      <select id="lstNazioni">
+        <option value="">Tutte le nazionalità</option>
+        <option value="au">AU</option>
+        <option value="br">BR</option>
+        <option value="ca">CA</option>
+        <option value="ch">CH</option>
+        <option value="de">DE</option>
+        <option value="dk">DK</option>
+        <option value="es">ES</option>
+        <option value="fi">FI</option>
+        <option value="fr">FR</option>
+        <option value="gb">GB</option>
+        <option value="ie">IE</option>
+        <option value="ir">IR</option>
+        <option value="no">NO</option>
+        <option value="nl">NL</option>
+        <option value="nz">NZ</option>
+        <option value="tr">TR</option>
+        <option value="us">US</option>
+      </select>
+    </div>
+    <br><br>
+    <input type="button" id="btnOk" value="GENERATE">
+    </div>
+  <div id="contenitore">
+    <br>
+    <div class="scheda">
+      <div>
+        <input type="button" class="divMove" id="indietro">
+        <img id="immagine">
+        <input type="button" class="divMove" id="avanti">
+        <div id="fotoUtente">
+          <p id="titolo"></p>
+          <p id="valore"></p>
+        </div>
+      </div>
+      <ul id="valuesList">
+        <li value="0"></li>
+        <li value="1"></li>
+        <li value="2"></li>
+        <li value="3"></li>
+        <li value="4"></li>
+        <li value="5"></li>
+      </ul>
+      <div id="currentProfile"></div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
