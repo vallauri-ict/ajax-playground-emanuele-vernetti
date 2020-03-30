@@ -1,0 +1,3 @@
+Questo progetto si basa sul sito randomuser.me, il quale consente di generare dei profili casuali con la possibilità di scegliere
+il numero di utenti da generare, il sesso, la nazionalità, ...
+Inoltre, è anche possibile andare a esportare i risultati nei formati XML, JSON e .csv
