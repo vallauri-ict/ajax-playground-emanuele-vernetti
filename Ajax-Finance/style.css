@@ -42,3 +42,7 @@ select{
   padding: 5px;
   margin: 10px;
 }
+
+canvas{
+  height: 100px;
+}

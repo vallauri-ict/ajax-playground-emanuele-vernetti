@@ -3,6 +3,7 @@
     <title>Get Stock Quotes</title>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="index.js" type="application/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -19,6 +20,20 @@
         </select>
         <label for="txtSearch">Cerca: </label>
         <input type="text" id="txtSearch" placeholder="Inserisci parola chiave">
+        <select id="cmbSelectForChart">
+            <option value="null"> -- Seleziona -- </option>
+            <option>Rank A: Real-Time Performance</option>
+            <option>Rank B: 1 Day Performance</option>
+            <option>Rank C: 5 Day Performance</option>
+            <option>Rank D: 1 Month Performance</option>
+            <option>Rank E: 3 Month Performance</option>
+            <option>Rank F: Year-to-Date (YTD) Performance</option>
+            <option>Rank G: 1 Year Performance</option>
+            <option>Rank H: 3 Year Performance</option>
+            <option>Rank I: 5 Year Performance</option>
+            <option>Rank J: 10 Year Performance</option>
+        </select>
+        </select>
         <div id="quote">
             <table cellspacing="0" cellpadding="3" id="tableQuotes">
                 <tr>
@@ -45,6 +60,7 @@
                 </tr>
             </table>
         </div>
+        <canvas id="myChart" width="400" height="400"></canvas>
     </div>
 </body>
 
