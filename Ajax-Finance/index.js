@@ -5,6 +5,7 @@ $(document).ready(function ()
     let _txtSearch=$("#txtSearch");
     let _tableQuotes=$("#tableQuotes");
     let ctx;
+    let chart;
     
     $("body").on("keyup","input",function ()
     {
@@ -98,9 +99,25 @@ $(document).ready(function ()
         {
             return data;
         });
-        let chart=new Chart($("#myChart"),JSON.parse(_data.responseText));
+        chart=new Chart($("#myChart"),JSON.parse(_data.responseText));
         return chart;
     }
+
+    $("#download").on('click', function()
+    {
+        let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+        let a =  $("#download");
+        a.href = url_base64jp;
+
+        setTimeout(function ()
+        {
+            let result=prompt("Vuoi salvare il grafico su Google Drive?");
+            if(result!=null)
+            {
+                
+            }
+        },3000);
+    });
 
 
 });
