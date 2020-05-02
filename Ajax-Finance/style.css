@@ -46,3 +46,7 @@ select{
 canvas{
   height: 100px;
 }
+
+a{
+  margin: 0 auto;
+}
