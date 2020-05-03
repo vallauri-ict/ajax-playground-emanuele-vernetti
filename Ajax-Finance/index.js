@@ -103,21 +103,37 @@ $(document).ready(function ()
         return chart;
     }
 
-    $("#download").on('click', function()
+    //Download Chart Image
+    document.getElementById("download").addEventListener('click', function()
     {
-        let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
-        let a =  $("#download");
+        var url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+        var a =  document.getElementById("download");
         a.href = url_base64jp;
-
         setTimeout(function ()
-        {
-            let result=prompt("Vuoi salvare il grafico su Google Drive?");
-            if(result!=null)
             {
-                window.open("http://127.0.0.1:8080/indexUpload.html");
-            }
-        },3000);
+                let result=prompt("Vuoi salvare il grafico su Google Drive?");
+                if(result!=null)
+                {
+                    window.open("http://127.0.0.1:8080/indexUpload.html");
+                }
+            },3000);
     });
+
+    // $("#download").on('click', function()
+    //     // {
+    //     //     let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+    //     //     let a =  $("#download");
+    //     //     a.href = url_base64jp;
+    //     //
+    //     //     setTimeout(function ()
+    //     //     {
+    //     //         let result=prompt("Vuoi salvare il grafico su Google Drive?");
+    //     //         if(result!=null)
+    //     //         {
+    //     //             window.open("http://127.0.0.1:8080/indexUpload.html");
+    //     //         }
+    //     //     },3000);
+    //     // });
 
 
 });

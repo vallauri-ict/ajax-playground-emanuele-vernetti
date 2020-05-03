@@ -3,18 +3,18 @@ $(document).ready(function()
      
     // client id of the project
 
-    var clientId = "957269115117-tj3vc6kpm67h6iffsnniadd0c5re2v8t.apps.googleusercontent.com";
+    let clientId = "957269115117-tj3vc6kpm67h6iffsnniadd0c5re2v8t.apps.googleusercontent.com";
 
     // redirect_uri of the project
 
-    var redirect_uri = "http://127.0.0.1:8080/upload.html";
+    let redirect_uri = "http://127.0.0.1:8080/upload.html";
     // scope of the project
 
-    var scope = "https://www.googleapis.com/auth/drive";
+    let scope = "https://www.googleapis.com/auth/drive";
 
     // the url to which the user is redirected to
 
-    var url = "";
+    let url = "";
 
 
     // this is event click listener for the button

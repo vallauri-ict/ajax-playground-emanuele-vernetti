@@ -6,8 +6,8 @@ $(document).ready(function(){
     const redirect_uri = "http://127.0.0.1:8080/upload.html" // replace with your redirect_uri;
     const client_secret = "YXdxlYcBAXziwgEqKJCJr6nK"; // replace with your client secret
     const scope = "https://www.googleapis.com/auth/drive";
-    var access_token= "";
-    var client_id = "957269115117-tj3vc6kpm67h6iffsnniadd0c5re2v8t.apps.googleusercontent.com"// replace it with your client id;
+    let access_token= "";
+    let client_id = "957269115117-tj3vc6kpm67h6iffsnniadd0c5re2v8t.apps.googleusercontent.com"// replace it with your client id;
     
 
     $.ajax({
@@ -32,9 +32,9 @@ $(document).ready(function(){
     function stripQueryStringAndHashFromPath(url) 
     {
         return url.split("?")[0].split("#")[0];
-    }   
+    }
 
-    var Upload = function (file) 
+    let Upload = function (file)
     {
         this.file = file;
     };
@@ -96,10 +96,10 @@ $(document).ready(function(){
     
     Upload.prototype.progressHandling = function (event) 
     {
-        var percent = 0;
-        var position = event.loaded || event.position;
-        var total = event.total;
-        var progress_bar_id = "#progress-wrp";
+        let percent = 0;
+        let position = event.loaded || event.position;
+        let total = event.total;
+        let progress_bar_id = "#progress-wrp";
         if (event.lengthComputable) {
             percent = Math.ceil(position / total * 100);
         }
@@ -110,8 +110,8 @@ $(document).ready(function(){
 
     $("#upload").on("click", function (e) 
     {
-        var file = $("#files")[0].files[0];
-        var upload = new Upload(file);
+        let file = $("#files")[0].files[0];
+        let upload = new Upload(file);
     
         // maby check size or type here with upload.getSize() and upload.getType()
     
