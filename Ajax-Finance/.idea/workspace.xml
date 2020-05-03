@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d900f273-a276-4104-88ac-ab29e12297db" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/upload.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,22 +65,42 @@
       <workItem from="1588426377032" duration="1002000" />
       <workItem from="1588496538567" duration="1510000" />
       <workItem from="1588498182255" duration="250000" />
-      <workItem from="1588514150253" duration="715000" />
+      <workItem from="1588514150253" duration="808000" />
     </task>
+    <task id="LOCAL-00001" summary="Commit">
+      <created>1588514914115</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588514914115</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Intentions" timestamp="1585929723920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Intentions/0.0.1920.1040@0.0.1920.1040" timestamp="1585929723920" />
+    <state x="513" y="115" key="CommitChangelistDialog2" timestamp="1588514913617">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="513" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1588514913617" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1585990893804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585990893804" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1588514919432">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588514919432" />
     <state x="715" y="365" key="cloudConfig.SelfSettingsDialog" timestamp="1585931813661">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
