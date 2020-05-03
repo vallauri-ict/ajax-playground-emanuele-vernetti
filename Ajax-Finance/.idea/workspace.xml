@@ -12,13 +12,18 @@
       <executable />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1a2NOvJzsin2VMwtVT1eIAcsjcG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -56,6 +61,8 @@
       <workItem from="1588409929881" duration="609000" />
       <workItem from="1588425129659" duration="3000" />
       <workItem from="1588426377032" duration="1002000" />
+      <workItem from="1588496538567" duration="1510000" />
+      <workItem from="1588498182255" duration="250000" />
     </task>
     <servers />
   </component>

@@ -114,7 +114,7 @@ $(document).ready(function ()
             let result=prompt("Vuoi salvare il grafico su Google Drive?");
             if(result!=null)
             {
-                
+                window.open("http://127.0.0.1:8080/indexUpload.html");
             }
         },3000);
     });
