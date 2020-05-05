@@ -66,7 +66,7 @@ $(document).ready(function(){
             type: "POST",
             beforeSend: function(request) {
                 request.setRequestHeader("Authorization", "Bearer" + " " + localStorage.getItem("accessToken"));
-                
+
             },
             url: "https://www.googleapis.com/upload/drive/v2/files",
             data:{
