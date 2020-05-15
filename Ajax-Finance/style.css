@@ -1,10 +1,23 @@
-html,
-body
+*
+{
+  margin: 0px;
+  padding: 0px;
+}
+html, body
 {
   background-image: url("img/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  overflow: hidden;
+  background-position: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#navbar
+{
+  width: 100%;
+  background: transparent;
+  padding: 10px 30px;
 }
 
 span
@@ -19,6 +32,11 @@ h1
   font-family: Consolas;
   font-size: 4.0em;
   color: white;
+}
+
+#titolo
+{
+  margin-top: 35px;
 }
 
 #sottotitolo
