@@ -26,7 +26,6 @@ $(document).ready(function ()
 
     _lstChart.on("change", function (data)
     {
-        alert(_lstChart.val());
         let datasector=inviaRichiesta("GET","http://localhost:3000/SECTOR");
         datasector.done(function (data)
         {
