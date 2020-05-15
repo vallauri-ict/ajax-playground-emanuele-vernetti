@@ -1,52 +1,62 @@
 html,
-body {
-  background-color: dodgerblue;
+body
+{
+  background-image: url("img/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
-#wrapper {
-  width: 900px;
-  border: 1px solid black;
+span
+{
+  color: white;
+  font-family: Consolas;
+  font-size: 1.5em;
+}
+
+h1
+{
+  font-family: Consolas;
+  font-size: 4.0em;
+  color: white;
+}
+
+#sottotitolo
+{
+  font-family: Consolas;
+  font-size: 1.5em;
+  color: white;
+  margin-bottom: 15px;
+}
+
+#wrapper
+{
   margin: 30px auto;
-  background-color: white;
-  box-shadow: 0 0 20px 7px black;
   text-align: center;
 }
 
-table {
+table
+{
   table-layout: fixed;
   width: 100%;
-  /* margin: 10px; */
+  font-family: Consolas;
 }
 
-table,
-th,
-td {
-  border: 1px solid black;
+tr
+{
+  font-family: Consolas;
 }
 
-th {
-  height: 60px;
+canvas
+{
+  margin: 20px;
 }
 
-td {
-  height: 30px;
+#driveImage
+{
+  width: 150px;
+  height: 129px;
+  display: inline;
 }
 
-h1{
-  text-align: center;
-  font-family: Verdana, serif;
-  font-size: 20pt;
-}
 
-select{
-  padding: 5px;
-  margin: 10px;
-}
-
-canvas{
-  height: 100px;
-}
-
-a{
-  margin: 0 auto;
-}

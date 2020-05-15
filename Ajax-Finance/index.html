@@ -1,73 +1,140 @@
 <html>
 <head>
     <title>Get Stock Quotes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="index.js" type="application/javascript"></script>
 </head>
 
 <body>
-<h1 align="center">Alpha Vantage</h1>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+    </ul>
+</nav>
+<h1 align="center" id="titolo">Alpha Vantage</h1>
+<h6 align="center" id="sottotitolo">Developed by: Emanuele Vernetti</h6>
     <div id="wrapper">
-        <select id="lstCompanies">
-            <option value="null"> -- Scegliere l'azienda desiderata -- </option>
-            <option value="MSFT">Microsoft</option>
-            <option value="SNE">Sony</option>
-            <option value="BABA">Alibaba</option>
-            <option value="IBM">IBM</option>
-            <option value="XIACF">Xiaomi</option>
-        </select>
-        <label for="txtSearch">Cerca: </label>
-        <input type="text" id="txtSearch" placeholder="Inserisci parola chiave">
-        <select id="cmbSelectForChart">
-            <option value="null"> -- Seleziona -- </option>
-            <option>Rank A: Real-Time Performance</option>
-            <option>Rank B: 1 Day Performance</option>
-            <option>Rank C: 5 Day Performance</option>
-            <option>Rank D: 1 Month Performance</option>
-            <option>Rank E: 3 Month Performance</option>
-            <option>Rank F: Year-to-Date (YTD) Performance</option>
-            <option>Rank G: 1 Year Performance</option>
-            <option>Rank H: 3 Year Performance</option>
-            <option>Rank I: 5 Year Performance</option>
-            <option>Rank J: 10 Year Performance</option>
-        </select>
-        </select>
-        <div id="quote">
-            <table cellspacing="0" cellpadding="3" id="tableQuotes">
-                <tr>
-                    <th>Symbol</th>
-                    <th>Last Trade</th>
-                    <th>Last Trade Time</th>
-                    <th>Change</th>
-                    <th>Open</th>
-                    <th>Previous Close</th>
-                    <th>Day's Low</th>
-                    <th>Day's High</th>
-                    <th>Volume</th>
-                </tr>
-                <tr>
-                    <td id="symbol"></td>
-                    <td id="lastTrade"></td>
-                    <td id="lastTradeTime"></td>
-                    <td id="change"></td>
-                    <td id="open"></td>
-                    <td id="previousClose"></td>
-                    <td id="daysLow"></td>
-                    <td id="daysHigh"></td>
-                    <td id="volume"></td>
-                </tr>
-            </table>
+        <div class="row">
+            <div class="col-sm-12" style="font-size: 2.0em; color: white; font-family: Consolas; margin-bottom: 20px;">Esercizio che utilizza chiamate $.ajax</div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <div class="text-center simple-text">
+                    <span>Seleziona un brand</span>
+                </div>
+                <div class="input-group">
+                    <select class="form-control" id="lstCompanies">
+                        <option value="null"></option>
+                        <option value="MSFT">Microsoft</option>
+                        <option value="SNE">Sony</option>
+                        <option value="BABA">Alibaba</option>
+                        <option value="IBM">IBM</option>
+                        <option value="XIACF">Xiaomi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="text-center simple-text">
+                    <span>Cerca...</span>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search..." id="txtSearch">
+                </div>
+            </div>
         </div>
-        <canvas id="myChart" width="400" height="400"></canvas>
-        <a id="download"
-        download="ChartImage.jpg" 
-        href=""
-        class="btn btn-primary"
-        title="Scarica grafico">Scarica grafico
-        <i class="fa fa-download"></i>
-        </a>
+
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <table class="table table-responsive" style="color:#ffffff;margin-top: 25px;font-family: Consolas;">
+                    <thead class="bg-dark">
+                    <tr>
+                        <td>Symbol</td>
+                        <td>Open</td>
+                        <td>High</td>
+                        <td>Low</td>
+                        <td>Price</td>
+                        <td>Volume</td>
+                        <td>Latest trading day</td>
+                        <td>Previous close</td>
+                        <td>Change</td>
+                        <td>Change percent</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="symbol"></td>
+                        <td id="open"></td>
+                        <td id="high"></td>
+                        <td id="low"></td>
+                        <td id="price"></td>
+                        <td id="volume"></td>
+                        <td id="latestTradingDay"></td>
+                        <td id="previousClose"></td>
+                        <td id="change"></td>
+                        <td id="changePercent"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br><br><br><br><br>
+
+        <div class="row">
+            <div class="col-sm-6">
+            <h1 align="center" id="titoloChart">Chart's section</h1>
+                <div class="col-sm-12">
+                    <div class="input-group">
+                        <select id="cmbSelectForChart" class="form-control">
+                            <option value="null"></option>
+                            <option>Rank A: Real-Time Performance</option>
+                            <option>Rank B: 1 Day Performance</option>
+                            <option>Rank C: 5 Day Performance</option>
+                            <option>Rank D: 1 Month Performance</option>
+                            <option>Rank E: 3 Month Performance</option>
+                            <option>Rank F: Year-to-Date (YTD) Performance</option>
+                            <option>Rank G: 1 Year Performance</option>
+                            <option>Rank H: 3 Year Performance</option>
+                            <option>Rank I: 5 Year Performance</option>
+                            <option>Rank J: 10 Year Performance</option>
+                        </select>
+                    </div>
+                </div>
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <div class="col-sm-12">
+                <a id="download" download="ChartImage.jpg" href="" class="btn btn-dark" title="Scarica grafico">Scarica grafico</a>
+            </div>
+            </div>
+            <div class="col-sm-6">
+                <h1 align="center" id="titoloDrive">Google Drive</h1>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img id="driveImage" src="img/drive.png">
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12">
+                    <a id="upload" class="btn btn-dark" href="" title="Upload file">Upload on Google Drive</a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </body>
 

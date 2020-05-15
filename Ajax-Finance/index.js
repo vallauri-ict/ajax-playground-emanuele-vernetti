@@ -12,6 +12,7 @@ $(document).ready(function ()
         showHints($(this).val());
     });
     _lst.prop("selectedIndex","0");
+
     _lst.on("change",function ()
     {
         if($(this).val()!="null")
@@ -118,23 +119,6 @@ $(document).ready(function ()
             },3000);
     });
 
-    // $("#download").on('click', function()
-    //     // {
-    //     //     let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
-    //     //     let a =  $("#download");
-    //     //     a.href = url_base64jp;
-    //     //
-    //     //     setTimeout(function ()
-    //     //     {
-    //     //         let result=prompt("Vuoi salvare il grafico su Google Drive?");
-    //     //         if(result!=null)
-    //     //         {
-    //     //             window.open("http://127.0.0.1:8080/indexUpload.html");
-    //     //         }
-    //     //     },3000);
-    //     // });
-
-
 });
 
 function getGlobalQuotes(symbol) {
@@ -143,14 +127,15 @@ function getGlobalQuotes(symbol) {
         function (data) {
             $("#symbol").text(data["Global Quote"]["01. symbol"]);
             let globalQuoteData = data["Global Quote"];
-            $("#previousClose").text(globalQuoteData["08. previous close"]);
             $("#open").text(globalQuoteData["02. open"]);
-            $("#lastTrade").text(globalQuoteData["05. price"]);
-            $("#lastTradeTime").text(globalQuoteData["07. latest trading day"]);
-            $("#change").text(globalQuoteData["09. change"]);
-            $("#daysLow").text(globalQuoteData["04. low"]);
-            $("#daysHigh").text(globalQuoteData["03. high"]);
+            $("#high").text(globalQuoteData["03. high"]);
+            $("#low").text(globalQuoteData["04. low"]);
+            $("#price").text(globalQuoteData["05. price"]);
             $("#volume").text(globalQuoteData["06. volume"]);
+            $("#latestTradingDay").text(globalQuoteData["07. latest trading day"]);
+            $("#previousClose").text(globalQuoteData["08. previous close"]);
+            $("#change").text(globalQuoteData["09. change"]);
+            $("#changePercent").text(globalQuoteData["10. change percent"]);
         }
     );
 }
