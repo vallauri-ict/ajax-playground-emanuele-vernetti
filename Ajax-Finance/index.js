@@ -13,7 +13,7 @@ $(document).ready(function ()
     let clientId = keys["web"]["client_id"];
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
-    
+
     $("body").on("keyup","input",function ()
     {
         showHints($(this).val());
@@ -21,6 +21,7 @@ $(document).ready(function ()
 
     _lst.prop("selectedIndex","0");
 
+    /*****************************VISUALIZZAZIONE DATI AZIENDA SELEZIONATA*******************************************/
     _lst.on("change",function ()
     {
         if($(this).val()!="null")
@@ -33,19 +34,7 @@ $(document).ready(function ()
         }
     });
 
-    function inviaRichiesta(method, url, parameters = "",async=true)
-    {
-        return $.ajax({
-            type: method,
-            url: url,
-            data: parameters,
-            contentType: "application/x-www-form-urlencoded;charset=utf-8",
-            dataType: "json",
-            timeout: 5000,
-            async:async
-        });
-    }
-
+    /*****************************RICERCA INCREMENTALE*******************************************/
     function showHints(str)
     {
         if(str.length>=2)
@@ -112,10 +101,7 @@ $(document).ready(function ()
         }
     })
 
-
-
-
-/*****************************CHART IMAGE*******************************************/
+    /*****************************CHART IMAGE*******************************************/
     _lstChart.on("change", function (data)
     {
         let datasector=inviaRichiesta("GET","http://localhost:3000/SECTOR");
@@ -156,6 +142,7 @@ $(document).ready(function ()
         chart.update();
     }
 });
+
 
 function getGlobalQuotes(symbol)
 {

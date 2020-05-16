@@ -1,18 +1,19 @@
-function isLogged(){
-    return localStorage.getItem("accessToken")!=null;
+function isLogged()
+{
+    if(localStorage.getItem("accessToken")!=null)
+    {
+        return localStorage.getItem("accessToken");
+    }
+    else
+    {
+        return null;
+    }
 }
 
 function signIn(clientId, clientSecret, redirectUri, scope,code)
 {
-    let url =
-        "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" +
-        redirectUri +
-        "&prompt=consent&response_type=code&client_id=" +
-        clientId +
-        "&scope=" +
-        scope +
-        "&access_type=offline";
-    let r_ = inviaRichiesta(
+    let url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" + redirectUri + "&prompt=consent&response_type=code&client_id=" + clientId + "&scope=" + scope + "&access_type=offline";
+    let richiesta = inviaRichiesta(
         "POST",
         "https://www.googleapis.com/oauth2/v4/token",
         {
@@ -25,52 +26,45 @@ function signIn(clientId, clientSecret, redirectUri, scope,code)
         },
         false
     );
-    r_.done(function (data) {
+    richiesta.done(function (data)
+    {
         localStorage.setItem("accessToken", data.access_token);
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("expires_in", data.expires_in);
         window.history.pushState({}, document.title, "index.html");
     });
-    setTimeout(window.location = url, 1500);
-
 }
 
-function inviaRichiesta(method, url, parameters = "", async = true) {
-    return $.ajax({
-        //PROMISE PER RICHESTA AJAX
-        type: method,
-        url: url,
-        data: parameters,
-        contentType: "application/x-www-form-urlencoded;charset=utf-8",
-        dataType: "json",
-        timeout: 5000,
-        async: async,
-    });
-}
-
-class Upload {
-    constructor(file) {
+class Upload
+{
+    constructor(file)
+    {
         this.file = file;
     }
-    getType() {
+    getType()
+    {
         localStorage.setItem("type", this.file.type);
         return this.file.type;
     }
-    getSize() {
+    getSize()
+    {
         localStorage.setItem("size", this.file.size);
         return this.file.size;
     }
-    getName() {
+    getName()
+    {
         return this.file.name;
     }
-    doUpload() {
+    doUpload()
+    {
         var formData = new FormData();
         // add assoc key values, this will be posts values
         formData.append("file", this.file, this.getName());
         formData.append("upload_file", true);
         return $.ajax({
             type: "POST",
-            beforeSend: function (request) {
+            beforeSend: function (request)
+            {
                 request.setRequestHeader(
                     "Authorization",
                     "Bearer" + " " + localStorage.getItem("accessToken")

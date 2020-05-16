@@ -20,12 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d900f273-a276-4104-88ac-ab29e12297db" name="Default Changelist" comment="Commit: migliorata la grafica della pagina html">
-      <change afterPath="$PROJECT_DIR$/GoogleDriveClass.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libreria.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API key.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GoogleDriveClass.js" beforeDir="false" afterPath="$PROJECT_DIR$/GoogleDriveClass.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +108,7 @@
       <workItem from="1589555784582" duration="4396000" />
       <workItem from="1589560334629" duration="8559000" />
       <workItem from="1589573277399" duration="908000" />
-      <workItem from="1589636350343" duration="7540000" />
+      <workItem from="1589636350343" duration="8198000" />
     </task>
     <task id="LOCAL-00001" summary="Commit">
       <created>1588514914115</created>
@@ -139,7 +138,21 @@
       <option name="project" value="LOCAL" />
       <updated>1589574174433</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="commit">
+      <created>1589650185858</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1589650185858</updated>
+    </task>
+    <task id="LOCAL-00006" summary="commit">
+      <created>1589650205570</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1589650205570</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +173,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commit" />
     <MESSAGE value="Commit: migliorata la grafica della pagina html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit: migliorata la grafica della pagina html" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Intentions" timestamp="1585929723920">
@@ -185,10 +199,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589570956584" />
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585990893804" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1589574176705">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1589650207108">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589574176705" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589650207108" />
     <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588514919432" />
     <state x="715" y="365" key="cloudConfig.SelfSettingsDialog" timestamp="1585931813661">
       <screen x="0" y="0" width="1920" height="1040" />
