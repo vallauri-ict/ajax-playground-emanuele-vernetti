@@ -1,6 +1,6 @@
-<html>
+<html lang="it">
 <head>
-    <title>Get Stock Quotes</title>
+    <title>Alpha Vantage</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -8,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="index.js" type="application/javascript"></script>
+    <script src="keys.js" type="application/javascript"></script>
+    <script src="GoogleDriveClass.js" type="application/javascript"></script>
+
 </head>
 
 <body>
@@ -28,7 +31,7 @@
 <h6 align="center" id="sottotitolo">Developed by: Emanuele Vernetti</h6>
     <div id="wrapper">
         <div class="row">
-            <div class="col-sm-12" style="font-size: 2.0em; color: white; font-family: Consolas; margin-bottom: 20px;">Esercizio che utilizza chiamate $.ajax</div>
+            <div class="col-sm-12" style="font-size: 2.0em; color: white; font-family: Consolas sans-serif; margin-bottom: 20px;">Esercizio che utilizza chiamate $.ajax</div>
             <div class="col-sm-2"></div>
             <div class="col-sm-4">
                 <div class="text-center simple-text">
@@ -57,7 +60,7 @@
 
         <div class="row justify-content-center">
             <div class="col-auto">
-                <table class="table table-responsive" style="color:#ffffff;margin-top: 25px;font-family: Consolas;">
+                <table class="table table-responsive" style="color: white;">
                     <thead class="bg-dark">
                     <tr>
                         <td>Symbol</td>
@@ -121,12 +124,16 @@
                 <h1 align="center" id="titoloDrive">Google Drive</h1>
                 <div class="row">
                     <div class="col-sm-12">
-                        <img id="driveImage" src="img/drive.png">
+                        <img id="driveImage" alt="Img not found" src="img/drive.png">
                     </div>
                 </div>
                 <br>
-                <div class="col-sm-12">
-                    <a id="upload" class="btn btn-dark" href="" title="Upload file">Upload on Google Drive</a>
+                <div class="input-group">
+                    <label for="driveFile" class="btn btn-dark col-sm-12" style="color: white">
+                        Choose your file
+                    </label>
+                    <input id="driveFile" type="file" style="display: none">
+                    <input id="uploadFile" type="button" class="btn btn-dark col-sm-12" value="Upload file on Google Drive">
                 </div>
             </div>
 

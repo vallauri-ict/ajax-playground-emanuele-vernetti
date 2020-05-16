@@ -1,7 +1,7 @@
 *
 {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 html, body
 {
@@ -30,7 +30,7 @@ span
 h1
 {
   font-family: Consolas;
-  font-size: 4.0em;
+  font-size: 3.0em;
   color: white;
 }
 
@@ -58,6 +58,8 @@ table
   table-layout: fixed;
   width: 100%;
   font-family: Consolas;
+  color:#ffffff;
+  margin-top: 25px;
 }
 
 tr
