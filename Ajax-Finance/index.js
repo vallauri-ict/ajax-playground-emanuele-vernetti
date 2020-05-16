@@ -61,18 +61,12 @@ $(document).ready(function ()
     }
 
     /*****************************GOOGLE DRIVE*******************************************/
-    //Download Chart Image
-    document.getElementById("download").addEventListener('click', function()
-    {
-        let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
-        let a =  document.getElementById("download");
-        a.href = url_base64jp;
-    });
+    let path;
 
     //Choose file to upload
     $("#driveFile").on("change",function ()
     {
-        let path=$(this).val();
+        path=$(this).val();
         if (path)
         {
             $("label[for=driveFile]").text(path);
@@ -88,20 +82,32 @@ $(document).ready(function ()
         }
         else
         {
-            var file = $("#driveFile")[0].files[0];
-            let upload = new Upload(file).doUpload();
-            upload.done(function (data)
+            if($("#driveFile").val()!="")
             {
-                alert("OK");
-            });
-            upload.fail(function ()
+                var file = $("#driveFile")[0].files[0];
+                let upload = new Upload(file).doUpload();
+                upload.done(function (data)
+                {
+                    alert("Caricamento su Google Drive effettuato correttamente");
+                    $("label[for=driveFile]").text("Choose your file");
+                    path=null;
+                    $("#driveFile").val("");
+                });
+                upload.fail(function ()
+                {
+                    alert("Errore nel caricamento");
+                });
+            }
+            else
             {
-                alert("NOK");
-            });
+                alert("You've to select a file first");
+            }
+
         }
     })
 
     /*****************************CHART IMAGE*******************************************/
+    //Require data
     _lstChart.on("change", function (data)
     {
         let datasector=inviaRichiesta("GET","http://localhost:3000/SECTOR");
@@ -115,6 +121,15 @@ $(document).ready(function ()
         });
     });
 
+    //Download Chart Image
+    document.getElementById("download").addEventListener('click', function()
+    {
+        let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+        let a =  document.getElementById("download");
+        a.href = url_base64jp;
+    });
+
+    //Create chart
     function creaGrafico(dataChart)
     {
         let _data = inviaRichiesta("GET", dataChart,{},false);
@@ -126,6 +141,7 @@ $(document).ready(function ()
         return chart;
     }
 
+    //Put data in chart
     function modifica(chart, contenuto)
     {
         let dataChart=chart["data"];
@@ -144,22 +160,22 @@ $(document).ready(function ()
 });
 
 
-function getGlobalQuotes(symbol)
-{
-    let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=CQB6JNQ90AXL7MEF";
-    $.getJSON(url,
-        function (data) {
-            $("#symbol").text(data["Global Quote"]["01. symbol"]);
-            let globalQuoteData = data["Global Quote"];
-            $("#open").text(globalQuoteData["02. open"]);
-            $("#high").text(globalQuoteData["03. high"]);
-            $("#low").text(globalQuoteData["04. low"]);
-            $("#price").text(globalQuoteData["05. price"]);
-            $("#volume").text(globalQuoteData["06. volume"]);
-            $("#latestTradingDay").text(globalQuoteData["07. latest trading day"]);
-            $("#previousClose").text(globalQuoteData["08. previous close"]);
-            $("#change").text(globalQuoteData["09. change"]);
-            $("#changePercent").text(globalQuoteData["10. change percent"]);
-        }
-    );
-}
+    function getGlobalQuotes(symbol)
+    {
+        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=CQB6JNQ90AXL7MEF";
+        $.getJSON(url,
+            function (data) {
+                $("#symbol").text(data["Global Quote"]["01. symbol"]);
+                let globalQuoteData = data["Global Quote"];
+                $("#open").text(globalQuoteData["02. open"]);
+                $("#high").text(globalQuoteData["03. high"]);
+                $("#low").text(globalQuoteData["04. low"]);
+                $("#price").text(globalQuoteData["05. price"]);
+                $("#volume").text(globalQuoteData["06. volume"]);
+                $("#latestTradingDay").text(globalQuoteData["07. latest trading day"]);
+                $("#previousClose").text(globalQuoteData["08. previous close"]);
+                $("#change").text(globalQuoteData["09. change"]);
+                $("#changePercent").text(globalQuoteData["10. change percent"]);
+            }
+        );
+    }

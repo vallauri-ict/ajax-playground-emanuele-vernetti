@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d900f273-a276-4104-88ac-ab29e12297db" name="Default Changelist" comment="Commit: migliorata la grafica della pagina html">
-      <change afterPath="$PROJECT_DIR$/libreria.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GoogleDriveClass.js" beforeDir="false" afterPath="$PROJECT_DIR$/GoogleDriveClass.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
@@ -108,7 +107,8 @@
       <workItem from="1589555784582" duration="4396000" />
       <workItem from="1589560334629" duration="8559000" />
       <workItem from="1589573277399" duration="908000" />
-      <workItem from="1589636350343" duration="8198000" />
+      <workItem from="1589636350343" duration="9088000" />
+      <workItem from="1589651711485" duration="267000" />
     </task>
     <task id="LOCAL-00001" summary="Commit">
       <created>1588514914115</created>
@@ -152,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589650205570</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="commit">
+      <created>1589650736810</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1589650736810</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,10 +206,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589570956584" />
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585990893804" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1589650207108">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1589650740321">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589650207108" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589650740321" />
     <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588514919432" />
     <state x="715" y="365" key="cloudConfig.SelfSettingsDialog" timestamp="1585931813661">
       <screen x="0" y="0" width="1920" height="1040" />

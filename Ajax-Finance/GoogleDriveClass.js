@@ -2,7 +2,8 @@ function isLogged()
 {
     if(localStorage.getItem("accessToken")!=null)
     {
-        return localStorage.getItem("accessToken");
+        let token=localStorage.getItem("accessToken");
+        return token;
     }
     else
     {
