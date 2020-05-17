@@ -1,20 +1,14 @@
-function isLogged()
-{
-    if(localStorage.getItem("accessToken")!=null)
-    {
-        let token=localStorage.getItem("accessToken");
-        return token;
-    }
-    else
-    {
-        return null;
-    }
-}
-
 function signIn(clientId, clientSecret, redirectUri, scope,code)
 {
-    let url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" + redirectUri + "&prompt=consent&response_type=code&client_id=" + clientId + "&scope=" + scope + "&access_type=offline";
-    let richiesta = inviaRichiesta(
+    let url =
+        "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" +
+        redirectUri +
+        "&prompt=consent&response_type=code&client_id=" +
+        clientId +
+        "&scope=" +
+        scope +
+        "&access_type=offline";
+    let r_ = inviaRichiesta(
         "POST",
         "https://www.googleapis.com/oauth2/v4/token",
         {
@@ -27,13 +21,14 @@ function signIn(clientId, clientSecret, redirectUri, scope,code)
         },
         false
     );
-    richiesta.done(function (data)
-    {
+    r_.done(function (data) {
         localStorage.setItem("accessToken", data.access_token);
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("expires_in", data.expires_in);
         window.history.pushState({}, document.title, "index.html");
     });
+    setTimeout(window.location = url, 1500);
+
 }
 
 class Upload
@@ -41,16 +36,6 @@ class Upload
     constructor(file)
     {
         this.file = file;
-    }
-    getType()
-    {
-        localStorage.setItem("type", this.file.type);
-        return this.file.type;
-    }
-    getSize()
-    {
-        localStorage.setItem("size", this.file.size);
-        return this.file.size;
     }
     getName()
     {

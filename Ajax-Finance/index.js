@@ -76,7 +76,7 @@ $(document).ready(function ()
     //Upload file
     $("#uploadFile").on("click",function ()
     {
-        if (!isLogged())
+        if(localStorage.getItem("accessToken")==null)
         {
             signIn(clientId, clientSecret, redirectUri, scope, code);
         }
@@ -104,7 +104,7 @@ $(document).ready(function ()
             }
 
         }
-    })
+    });
 
     /*****************************CHART IMAGE*******************************************/
     //Require data
