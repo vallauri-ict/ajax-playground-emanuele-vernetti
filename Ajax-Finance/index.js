@@ -1,5 +1,6 @@
 $(document).ready(function ()
 {
+    //Puntatori a controlli HTML
     let _lst=$("#lstCompanies");
     let _lstChart=$("#cmbSelectForChart");
     let _txtSearch=$("#txtSearch");
@@ -7,6 +8,7 @@ $(document).ready(function ()
     let ctx;
     let chart;
 
+    //Dati necessari per l'utilizzo di Google Drive
     const clientSecret = keys["web"]["client_secret"];
     let redirectUri = keys["web"]["redirect_uris"][0];
     let scope = "https://www.googleapis.com/auth/drive";
@@ -112,7 +114,7 @@ $(document).ready(function ()
         }
     });
 
-    /*****************************CHART IMAGE*******************************************/
+    /*****************************GRAFICO*******************************************/
     //Require data
     _lstChart.on("change", function (data)
     {
