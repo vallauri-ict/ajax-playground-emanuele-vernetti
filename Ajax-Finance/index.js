@@ -14,6 +14,11 @@ $(document).ready(function ()
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
 
+    if(localStorage.getItem("flag")!=null)
+    {
+        setTokenInLS(clientId, clientSecret, redirectUri, scope, code);
+    }
+
     $("body").on("keyup","input",function ()
     {
         showHints($(this).val());
@@ -69,7 +74,8 @@ $(document).ready(function ()
         path=$(this).val();
         if (path)
         {
-            $("label[for=driveFile]").text(path);
+            let filename=path.split("\\").pop();
+            $("label[for=driveFile]").text(filename);
         }
     });
 
@@ -84,7 +90,7 @@ $(document).ready(function ()
         {
             if($("#driveFile").val()!="")
             {
-                var file = $("#driveFile")[0].files[0];
+                let file = $("#driveFile")[0].files[0];
                 let upload = new Upload(file).doUpload();
                 upload.done(function (data)
                 {

@@ -1,4 +1,4 @@
-function signIn(clientId, clientSecret, redirectUri, scope,code)
+function signIn(clientId, clientSecret, redirectUri, scope)
 {
     let url =
         "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" +
@@ -8,7 +8,14 @@ function signIn(clientId, clientSecret, redirectUri, scope,code)
         "&scope=" +
         scope +
         "&access_type=offline";
-    let r_ = inviaRichiesta(
+    let ok="false";
+    localStorage.setItem("flag",ok);
+    window.location=url;
+}
+
+function setTokenInLS(clientId, clientSecret, redirectUri, scope, code)
+{
+    let richiesta = inviaRichiesta(
         "POST",
         "https://www.googleapis.com/oauth2/v4/token",
         {
@@ -21,15 +28,15 @@ function signIn(clientId, clientSecret, redirectUri, scope,code)
         },
         false
     );
-    r_.done(function (data) {
+    richiesta.done(function (data)
+    {
         localStorage.setItem("accessToken", data.access_token);
         localStorage.setItem("refreshToken", data.refreshToken);
         localStorage.setItem("expires_in", data.expires_in);
         window.history.pushState({}, document.title, "index.html");
     });
-    setTimeout(window.location = url, 1500);
-
 }
+
 
 class Upload
 {
@@ -43,7 +50,7 @@ class Upload
     }
     doUpload()
     {
-        var formData = new FormData();
+        let formData = new FormData();
         // add assoc key values, this will be posts values
         formData.append("file", this.file, this.getName());
         formData.append("upload_file", true);
@@ -60,7 +67,7 @@ class Upload
             uploadType: "media",
 
             xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
+                let myXhr = $.ajaxSettings.xhr();
                 return myXhr;
             },
             async: true,
