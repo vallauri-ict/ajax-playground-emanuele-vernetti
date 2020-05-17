@@ -1,5 +1,6 @@
 $(document).ready(function ()
 {
+    //Puntatori a controlli HTML
     let _lst=$("#lstCompanies");
     let _lstChart=$("#cmbSelectForChart");
     let _txtSearch=$("#txtSearch");
