@@ -1,16 +1,22 @@
 "use strict";
 
-const key="0DZM41DI0VGMH1DO";
+const key="CQB6JNQ90AXL7MEF";
 
 $(document).ready(function ()
 {
     //Puntatori a controlli HTML e variabili globali
+    let _btnLogin=$("#btnLogin");
+    let _btnLogout=$("#btnLogout");
     let _lst=$("#lstCompanies");
     let _lstChart=$("#cmbSelectForChart");
     let _thead=$("#tablethead");
     let _tbody=$("#tabletbody");
     let _lblDriveFile=$("#lblDriveFile");
     let _driveFile=$("#driveFile");
+    let _uploadFile=$("#uploadFile");
+    let _divSuccess=$("#divSuccess");
+    let _divWarning=$("#divWarning");
+    let _divDanger=$("#divDanger");
     let ctx,chart;
     let headvet=["Symbol","Open","High","Low","Price","Volume","Latest trading day","Previous close","Change","Change percent"];
 
@@ -22,6 +28,9 @@ $(document).ready(function ()
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
 
+    disabilitaControlli();
+
+    //Controllo parametri in Local storage
     if((code)&&(!localStorage.getItem("accessToken")))
     {
         setTokenInLS(clientId, clientSecret, redirectUri, scope, code);
@@ -30,14 +39,27 @@ $(document).ready(function ()
     {
         _lblDriveFile.html("Choose your file");
         _driveFile.prop("disabled","");
+        _uploadFile.css({
+            "visibility":"visible"
+        });
+        _btnLogin.prop("disabled","disabled");
+        _btnLogin.removeClass("btn-success");
+
     }
     else
     {
-        _lblDriveFile.html("You have to log in first");
+        _lblDriveFile.html("YOU HAVE TO LOG IN FIRST");
         _lblDriveFile.css({
             "color":"rgb(255, 0, 0)"
         });
         _driveFile.prop("disabled","disabled");
+        _uploadFile.css({
+            "visibility":"hidden"
+        });
+        _btnLogin.prop("disabled","");
+        _btnLogin.addClass("btn-success");
+        _btnLogout.prop("disabled","disabled");
+        _btnLogout.removeClass("btn-danger");
     }
 
     //Intestazione tabella
@@ -64,6 +86,22 @@ $(document).ready(function ()
             alert("Selezionare un'azienda");
         }
     });
+
+    function getGlobalQuotes(symbol)
+    {
+        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey="+key;
+        let vet=["01. symbol","02. open","03. high","04. low","05. price","06. volume","07. latest trading day","08. previous close","09. change","10. change percent"];
+        $.getJSON(url, function (data)
+        {
+            let globalQuoteData = data["Global Quote"];
+            let _tr=$("<tr>");
+            for(let i=0;i<10;i++)
+            {
+                $("<td>").html(globalQuoteData[vet[i]]).appendTo(_tr);
+            }
+            _tr.appendTo(_tbody);
+        });
+    }
 
     /*****************************   TEXTBOX DI RICERCA   *******************************************/
     $("body").on("keyup","input",function ()
@@ -111,24 +149,28 @@ $(document).ready(function ()
         }
     }
 
-    /*****************************GOOGLE DRIVE*******************************************/
+    /*****************************   GOOGLE DRIVE   *******************************************/
     let path;
 
-    $("#btnLogin").on("click",function ()
+    _btnLogin.on("click",function ()
     {
         signIn(clientId, clientSecret, redirectUri, scope, code);
     });
 
-    $("#btnLogout").on("click",function ()
+    _btnLogout.on("click",function ()
     {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("expires_in");
+        setTimeout(function ()
+        {
+
+        },1500);
         window.location="index.html";
     });
 
     //Scegli il file da caricare
-    $("#driveFile").on("change",function ()
+    _driveFile.on("change",function ()
     {
         path=$(this).val();
         if (path)
@@ -139,32 +181,50 @@ $(document).ready(function ()
     });
 
     //Carica il file su Drive
-    $("#uploadFile").on("click",function ()
+    _uploadFile.on("click",function ()
     {
-        if($("#driveFile").val()!="")
+        if(_driveFile.val()!="")
         {
             let file = $("#driveFile")[0].files[0];
             let upload = new Upload(file).doUpload();
             upload.done(function (data)
             {
-                alert("Caricamento su Google Drive effettuato correttamente");
+                _divSuccess.css({
+                    "display":"block"
+                });
+                setTimeout(function ()
+                {
+                    _divSuccess.fadeOut(2500);
+                },2000);
                 $("label[for=driveFile]").text("Choose your file");
                 path=null;
                 $("#driveFile").val("");
             });
             upload.fail(function ()
             {
-                alert("Errore nel caricamento");
+                _divDanger.css({
+                    "display":"block"
+                });
+                setTimeout(function ()
+                {
+                    _divDanger.fadeOut(3000);
+                },2000);
             });
         }
         else
         {
-            alert("You've to select a file first");
+            _divWarning.css({
+                "display":"block"
+            });
+            setTimeout(function ()
+            {
+                _divWarning.fadeOut(2500);
+            },2000);
         }
     });
 
-    /*****************************GRAFICO*******************************************/
-    //Require data
+    /*****************************   GRAFICO   *******************************************/
+    //Richiedi dati
     _lstChart.on("change", function (data)
     {
         let datasector=inviaRichiesta("GET","http://localhost:3000/SECTOR");
@@ -178,7 +238,7 @@ $(document).ready(function ()
         });
     });
 
-    //Download Chart Image
+    //Scarica l'immagine del grafico
     document.getElementById("download").addEventListener('click', function()
     {
         let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
@@ -186,7 +246,7 @@ $(document).ready(function ()
         a.href = url_base64jp;
     });
 
-    //Create chart
+    //Crea grafico
     function creaGrafico(dataChart)
     {
         let _data = inviaRichiesta("GET", dataChart,{},false);
@@ -198,7 +258,7 @@ $(document).ready(function ()
         return chart;
     }
 
-    //Put data in chart
+    //Inserisci i dati nel grafico
     function modifica(chart, contenuto)
     {
         let dataChart=chart["data"];
@@ -215,19 +275,20 @@ $(document).ready(function ()
         chart.update();
     }
 
-    function getGlobalQuotes(symbol)
+    /*****************************   FUNZIONI GENERICHE   *******************************************/
+
+    function disabilitaControlli()
     {
-        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey="+key;
-        let vet=["01. symbol","02. open","03. high","04. low","05. price","06. volume","07. latest trading day","08. previous close","09. change","10. change percent"];
-        $.getJSON(url, function (data)
-            {
-                let globalQuoteData = data["Global Quote"];
-                let _tr=$("<tr>");
-                for(let i=0;i<10;i++)
-                {
-                    $("<td>").html(globalQuoteData[vet[i]]).appendTo(_tr);
-                }
-                _tr.appendTo(_tbody);
-            });
+        _divSuccess.css({
+            "display":"none"
+        });
+        _divWarning.css({
+            "display":"none"
+        });
+        _divDanger.css({
+            "display":"none"
+        });
+        _btnLogin.prop("disabled","disabled");
+        _btnLogin.removeClass("btn-success");
     }
 });
