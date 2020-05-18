@@ -1,12 +1,17 @@
 <html lang="it">
 <head>
     <title>Alpha Vantage</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="index.js" type="application/javascript"></script>
     <script src="keys.js" type="application/javascript"></script>
     <script src="GoogleDriveClass.js" type="application/javascript"></script>
@@ -15,8 +20,10 @@
 
 <body>
 
+<!--------------------   Navbar   ------------------->
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarTogglerDemo01" data-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -30,10 +37,10 @@
 
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <button type="button" class="btn btn-success" id="btnLogin">Log In</button>
+            <button class="btn btn-success" id="btnLogin" type="button">Log In</button>
         </li>
         <li class="nav-item">
-            <button type="button" class="btn btn-danger" id="btnLogout">Log Out</button>
+            <button class="btn btn-danger" id="btnLogout" type="button">Log Out</button>
         </li>
     </ul>
 </nav>
@@ -41,106 +48,112 @@
 <br><br><br>
 <h1 align="center" id="titolo">Alpha Vantage</h1>
 <h6 align="center" id="sottotitolo">Developed by: Emanuele Vernetti</h6>
-    <div id="wrapper">
-        <div class="row">
-            <div class="col-sm-12" style="font-size: 2.0em; color: white; font-family: Consolas sans-serif; margin-bottom: 20px;">Exercise that uses Ajax calls</div>
-            <div class="col-sm-2"></div>
-            <div class="col-sm-4">
-                <div class="text-center simple-text">
-                    <span>Select a brand from this list</span>
-                </div>
+<div id="wrapper">
+    <div class="row">
+        <div class="col-sm-12"
+             style="font-size: 2.0em; color: white; font-family: Consolas sans-serif; margin-bottom: 20px;">Exercise
+            that uses Ajax calls
+        </div>
+        <!--------------------   ComboBox e TextBox   ------------------->
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <div class="text-center simple-text">
+                <span>Select a brand from this list</span>
+            </div>
+            <div class="input-group">
+                <select class="form-control" id="lstCompanies">
+                    <option value="null">--Select a brand--</option>
+                    <option value="MSFT">Microsoft</option>
+                    <option value="SNE">Sony</option>
+                    <option value="BABA">Alibaba</option>
+                    <option value="IBM">IBM</option>
+                    <option value="XIACF">Xiaomi</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="text-center simple-text">
+                    <span>Search
+                    </span>
+            </div>
+            <div class="input-group">
+                <input class="form-control" id="txtSearch" placeholder="Search..." type="text">
+            </div>
+        </div>
+    </div>
+
+    <!--------------------   Tabella per la visualizzazione dei risultati   ------------------->
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <table class="table table-responsive" id="tableQuotes" style="color: white;">
+                <thead class="bg-dark" id="tablethead"></thead>
+                <tbody id="tabletbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br>
+
+    <!--------------------   Grafico   ------------------->
+    <div class="row">
+        <div class="col-sm-6" id="divChart">
+            <h1 align="center" id="titoloChart">Chart's section</h1>
+            <div class="col-sm-12">
                 <div class="input-group">
-                    <select class="form-control" id="lstCompanies">
-                        <option value="null">--Select a brand--</option>
-                        <option value="MSFT">Microsoft</option>
-                        <option value="SNE">Sony</option>
-                        <option value="BABA">Alibaba</option>
-                        <option value="IBM">IBM</option>
-                        <option value="XIACF">Xiaomi</option>
+                    <select class="form-control" id="cmbSelectForChart">
+                        <option value="null"></option>
+                        <option>Rank A: Real-Time Performance</option>
+                        <option>Rank B: 1 Day Performance</option>
+                        <option>Rank C: 5 Day Performance</option>
+                        <option>Rank D: 1 Month Performance</option>
+                        <option>Rank E: 3 Month Performance</option>
+                        <option>Rank F: Year-to-Date (YTD) Performance</option>
+                        <option>Rank G: 1 Year Performance</option>
+                        <option>Rank H: 3 Year Performance</option>
+                        <option>Rank I: 5 Year Performance</option>
+                        <option>Rank J: 10 Year Performance</option>
                     </select>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="text-center simple-text">
-                    <span>Search
-                    </span>
-                </div>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search..." id="txtSearch">
-                </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-auto">
-                <table id="tableQuotes" class="table table-responsive" style="color: white;">
-                    <thead class="bg-dark" id="tablethead"></thead>
-                    <tbody id="tabletbody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <br><br><br><br><br><br><br><br><br><br>
-
-        <div class="row">
-            <div class="col-sm-6" id="divChart">
-            <h1 align="center" id="titoloChart">Chart's section</h1>
-                <div class="col-sm-12">
-                    <div class="input-group">
-                        <select id="cmbSelectForChart" class="form-control">
-                            <option value="null"></option>
-                            <option>Rank A: Real-Time Performance</option>
-                            <option>Rank B: 1 Day Performance</option>
-                            <option>Rank C: 5 Day Performance</option>
-                            <option>Rank D: 1 Month Performance</option>
-                            <option>Rank E: 3 Month Performance</option>
-                            <option>Rank F: Year-to-Date (YTD) Performance</option>
-                            <option>Rank G: 1 Year Performance</option>
-                            <option>Rank H: 3 Year Performance</option>
-                            <option>Rank I: 5 Year Performance</option>
-                            <option>Rank J: 10 Year Performance</option>
-                        </select>
-                    </div>
-                </div>
-            <canvas id="myChart" width="400" height="400"></canvas>
+            <canvas height="400" id="myChart" width="400"></canvas>
+            <!--------------------   Pulsante per il download del grafico   ------------------->
             <div class="col-sm-12">
-                <a id="download" download="ChartImage.jpg" href="" class="btn btn-dark" title="Scarica grafico">Download chart's image as a .jpg file</a>
+                <a class="btn btn-dark" download="ChartImage.jpg" href="" id="download" title="Scarica grafico">Download
+                    chart's image as a .jpg file</a>
             </div>
-            </div>
-            <div class="col-sm-6" id="divDrive">
-                <h1 align="center" id="titoloDrive">Google Drive</h1>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <img id="driveImage" alt="Img not found" src="img/drive.png">
-                    </div>
-                </div>
-                <br>
-                <div class="input-group">
-                    <label id="lblDriveFile" for="driveFile" class="btn btn-dark col-sm-12" style="color: white;">
-                        Choose your file
-                    </label>
-                    <input id="driveFile" type="file" style="display: none">
-                    <input id="uploadFile" type="button" class="btn btn-dark col-sm-12" value="Upload file on Google Drive">
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="alert alert-success fade show" id="divSuccess">
-                            <strong>Success!</strong> The upload has been done correctly.
-                        </div>
-                        <div class="alert alert-warning fade show" id="divWarning">
-                            <strong>Warning!</strong> You've to select a file first. Then you'll be able to upload it on Google Drive.
-                        </div>
-                        <div class="alert alert-danger fade show" id="divDanger">
-                            <strong>Danger!</strong> There was an error while uploading.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
+        <div class="col-sm-6" id="divDrive">
+            <h1 align="center" id="titoloDrive">Google Drive</h1>
+            <div class="row">
+                <div class="col-sm-12">
+                    <img alt="Img not found" id="driveImage" src="img/drive.png">
+                </div>
+            </div>
+            <br>
+            <div class="input-group">
+                <label class="btn btn-dark col-sm-12" for="driveFile" id="lblDriveFile" style="color: white;">
+                    Choose your file
+                </label>
+                <input id="driveFile" style="display: none" type="file">
+                <input class="btn btn-dark col-sm-12" id="uploadFile" type="button" value="Upload file on Google Drive">
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="alert alert-success fade show" id="divSuccess">
+                        <strong>Success!</strong> The upload has been done correctly.
+                    </div>
+                    <div class="alert alert-warning fade show" id="divWarning">
+                        <strong>Warning!</strong> You've to select a file first. Then you'll be able to upload it on
+                        Google Drive.
+                    </div>
+                    <div class="alert alert-danger fade show" id="divDanger">
+                        <strong>Danger!</strong> There was an error while uploading.
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </body>
-
 </html>
