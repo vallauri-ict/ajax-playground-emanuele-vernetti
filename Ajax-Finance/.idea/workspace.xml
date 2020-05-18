@@ -61,7 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/img" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -69,6 +69,11 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\emanu\Documents\GitHub\ajax-playground-emanuele-vernetti\Ajax-Finance\img" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -118,6 +123,7 @@
       <workItem from="1589805389516" duration="10353000" />
       <workItem from="1589815884672" duration="10232000" />
       <workItem from="1589834887529" duration="116000" />
+      <workItem from="1589835338221" duration="1309000" />
     </task>
     <task id="LOCAL-00001" summary="Commit">
       <created>1588514914115</created>

@@ -94,13 +94,21 @@ $(document).ready(function ()
         let vet = ["01. symbol", "02. open", "03. high", "04. low", "05. price", "06. volume", "07. latest trading day", "08. previous close", "09. change", "10. change percent"];
         $.getJSON(url, function (data)
         {
-            let globalQuoteData = data["Global Quote"];
-            let _tr = $("<tr>");
-            for (let i = 0; i < 10; i++)
+            if("Note" in data)
             {
-                $("<td>").html(globalQuoteData[vet[i]]).appendTo(_tr);
+                alert("Hai esaurito il numero di chiamate disponibili");
             }
-            _tr.appendTo(_tbody);
+            else
+            {
+                let globalQuoteData = data["Global Quote"];
+                let _tr = $("<tr>");
+                for (let i = 0; i < 10; i++)
+                {
+                    $("<td>").html(globalQuoteData[vet[i]]).appendTo(_tr);
+                }
+                _tr.appendTo(_tbody);
+            }
+
         });
     }
 
@@ -116,35 +124,49 @@ $(document).ready(function ()
         if (str.length >= 2)
         {
             _tbody.html("");
+
             let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + str + "&apikey=" + key;
             $.getJSON(url, function (data)
             {
-                for (let i = 0; ((i < data["bestMatches"].length) && (i < 3)); i++)
+                if("Note" in data)
                 {
-                    let symbolSearch = data["bestMatches"][i]["1. symbol"];
-                    let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbolSearch + "&apikey=" + key;
-                    let r = $.ajax(url);
-                    r.done(function (data)
+                    alert("Hai esaurito il numero di chiamate disponibili");
+                }
+                else
+                {
+                    for (let i = 0; ((i < data["bestMatches"].length) && (i < 4)); i++)
                     {
-                        let _tr = $("<tr>");
+                        let symbolSearch = data["bestMatches"][i]["1. symbol"];
+                        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbolSearch + "&apikey=" + key;
+                        let r = $.ajax(url);
+                        r.done(function (data)
+                        {
+                            if("Note" in data)
+                            {
+                                alert("Hai esaurito il numero di chiamate disponibili");
+                            }
+                            else
+                            {
+                                let _tr = $("<tr>");
+                                $("<td>").html(data["Global Quote"]["01. symbol"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["02. open"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["03. high"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["04. low"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["05. price"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["06. volume"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["07. lastest trading day"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["08. previous close"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["09. change"]).appendTo(_tr);
+                                $("<td>").html(data["Global Quote"]["10. change percent"]).appendTo(_tr);
 
-                        $("<td>").html(data["Global Quote"]["01. symbol"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["02. open"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["03. high"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["04. low"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["05. price"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["06. volume"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["07. lastest trading day"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["08. previous close"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["09. change"]).appendTo(_tr);
-                        $("<td>").html(data["Global Quote"]["10. change percent"]).appendTo(_tr);
-
-                        _tr.appendTo(_tbody);
-                    })
-                    r.fail(function (data)
-                    {
-                        console.log("nok");
-                    })
+                                _tr.appendTo(_tbody);
+                            }
+                        })
+                        r.fail(function (data)
+                        {
+                            console.log("nok");
+                        })
+                    }
                 }
             });
         }
