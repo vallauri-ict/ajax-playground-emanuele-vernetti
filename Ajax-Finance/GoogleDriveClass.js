@@ -8,8 +8,6 @@ function signIn(clientId, clientSecret, redirectUri, scope)
         "&scope=" +
         scope +
         "&access_type=offline";
-    let ok="false";
-    localStorage.setItem("flag",ok);
     window.location=url;
 }
 
@@ -35,6 +33,10 @@ function setTokenInLS(clientId, clientSecret, redirectUri, scope, code)
         localStorage.setItem("expires_in", data.expires_in);
         window.history.pushState({}, document.title, "index.html");
     });
+    richiesta.fail(function (error)
+    {
+        console.log(error);
+    })
 }
 
 

@@ -14,19 +14,20 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <ul class="navbar-nav" id="navbar">
         <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="#titolo">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#divChart">Chart</a>
+            <button type="button" class="btn btn-success" id="btnLogin">Log In</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#divDrive">Google Drive</a>
+            <button type="button" class="btn btn-danger" id="btnLogout">Log Out</button>
         </li>
     </ul>
 </nav>
+<br><br><br>
 <h1 align="center" id="titolo">Alpha Vantage</h1>
 <h6 align="center" id="sottotitolo">Developed by: Emanuele Vernetti</h6>
     <div id="wrapper">
@@ -39,7 +40,7 @@
                 </div>
                 <div class="input-group">
                     <select class="form-control" id="lstCompanies">
-                        <option value="null"></option>
+                        <option value="null">--Select a brand--</option>
                         <option value="MSFT">Microsoft</option>
                         <option value="SNE">Sony</option>
                         <option value="BABA">Alibaba</option>
@@ -61,35 +62,9 @@
 
         <div class="row justify-content-center">
             <div class="col-auto">
-                <table class="table table-responsive" style="color: white;">
-                    <thead class="bg-dark">
-                    <tr>
-                        <td>Symbol</td>
-                        <td>Open</td>
-                        <td>High</td>
-                        <td>Low</td>
-                        <td>Price</td>
-                        <td>Volume</td>
-                        <td>Latest trading day</td>
-                        <td>Previous close</td>
-                        <td>Change</td>
-                        <td>Change percent</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td id="symbol"></td>
-                        <td id="open"></td>
-                        <td id="high"></td>
-                        <td id="low"></td>
-                        <td id="price"></td>
-                        <td id="volume"></td>
-                        <td id="latestTradingDay"></td>
-                        <td id="previousClose"></td>
-                        <td id="change"></td>
-                        <td id="changePercent"></td>
-                    </tr>
-                    </tbody>
+                <table id="tableQuotes" class="table table-responsive" style="color: white;">
+                    <thead class="bg-dark" id="tablethead"></thead>
+                    <tbody id="tabletbody"></tbody>
                 </table>
             </div>
         </div>
@@ -130,7 +105,7 @@
                 </div>
                 <br>
                 <div class="input-group">
-                    <label for="driveFile" class="btn btn-dark col-sm-12" style="color: white">
+                    <label id="lblDriveFile" for="driveFile" class="btn btn-dark col-sm-12" style="color: white;">
                         Choose your file
                     </label>
                     <input id="driveFile" type="file" style="display: none">

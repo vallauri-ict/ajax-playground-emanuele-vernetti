@@ -1,12 +1,18 @@
+"use strict";
+
+const key="0DZM41DI0VGMH1DO";
+
 $(document).ready(function ()
 {
-    //Puntatori a controlli HTML
+    //Puntatori a controlli HTML e variabili globali
     let _lst=$("#lstCompanies");
     let _lstChart=$("#cmbSelectForChart");
-    let _txtSearch=$("#txtSearch");
-    let _tableQuotes=$("#tableQuotes");
-    let ctx;
-    let chart;
+    let _thead=$("#tablethead");
+    let _tbody=$("#tabletbody");
+    let _lblDriveFile=$("#lblDriveFile");
+    let _driveFile=$("#driveFile");
+    let ctx,chart;
+    let headvet=["Symbol","Open","High","Low","Price","Volume","Latest trading day","Previous close","Change","Change percent"];
 
     //Dati necessari per l'utilizzo di Google Drive
     const clientSecret = keys["web"]["client_secret"];
@@ -16,19 +22,37 @@ $(document).ready(function ()
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
 
-    if(localStorage.getItem("flag")!=null)
+    if((code)&&(!localStorage.getItem("accessToken")))
     {
         setTokenInLS(clientId, clientSecret, redirectUri, scope, code);
     }
-
-    $("body").on("keyup","input",function ()
+    else if((code)||(localStorage.getItem("accessToken")))
     {
-        showHints($(this).val());
-    });
+        _lblDriveFile.html("Choose your file");
+        _driveFile.prop("disabled","");
+    }
+    else
+    {
+        _lblDriveFile.html("You have to log in first");
+        _lblDriveFile.css({
+            "color":"rgb(255, 0, 0)"
+        });
+        _driveFile.prop("disabled","disabled");
+    }
+
+    //Intestazione tabella
+    let _headrow=$("<tr>");
+    for(let i=0;i<10;i++)
+    {
+        let _headcell=$("<th>");
+        _headcell.html(headvet[i]);
+        _headcell.appendTo(_headrow);
+    }
+    _headrow.appendTo(_thead);
 
     _lst.prop("selectedIndex","0");
 
-    /*****************************VISUALIZZAZIONE DATI AZIENDA SELEZIONATA*******************************************/
+    /*****************************   COMBOBOX   *******************************************/
     _lst.on("change",function ()
     {
         if($(this).val()!="null")
@@ -41,36 +65,69 @@ $(document).ready(function ()
         }
     });
 
-    /*****************************RICERCA INCREMENTALE*******************************************/
+    /*****************************   TEXTBOX DI RICERCA   *******************************************/
+    $("body").on("keyup","input",function ()
+    {
+        showHints($(this).val());
+    });
+
+    /*****************************   RICERCA INCREMENTALE   *******************************************/
     function showHints(str)
     {
         if(str.length>=2)
         {
-            _tableQuotes.html("");
-            let url="https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+str+"&apikey=CQB6JNQ90AXL7MEF";
-            $.getJSON(url,
-                function (data)
+            _tbody.html("");
+            let url="https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="+str+"&apikey="+key;
+            $.getJSON(url, function (data)
                 {
-                    for(let i=0;i<data["bestMatches"].length;i++)
+                    for(let i=0;((i<data["bestMatches"].length)&&(i<3));i++)
                     {
-                        let symbolSearch = data["bestMatches"][0]["1. symbol"];
-                        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbolSearch + "&apikey=CQB6JNQ90AXL7MEF";
-                        $.getJSON(url, function (data)
+                        let symbolSearch = data["bestMatches"][i]["1. symbol"];
+                        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbolSearch + "&apikey="+key;
+                        let r=$.ajax(url);
+                        r.done(function (data)
                         {
-                            //Caricamento dei dati nella tabella
+                            let _tr=$("<tr>");
 
-                            //Codice rimosso a causa del limite delle chiamate imposto da AlphaVantage
-                        });
+                            $("<td>").html(data["Global Quote"]["01. symbol"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["02. open"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["03. high"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["04. low"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["05. price"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["06. volume"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["07. lastest trading day"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["08. previous close"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["09. change"]).appendTo(_tr);
+                            $("<td>").html(data["Global Quote"]["10. change percent"]).appendTo(_tr);
+
+                            _tr.appendTo(_tbody);
+                        })
+                        r.fail(function (data)
+                        {
+                            console.log("nok");
+                        })
                     }
-                }
-            );
+                });
         }
     }
 
     /*****************************GOOGLE DRIVE*******************************************/
     let path;
 
-    //Choose file to upload
+    $("#btnLogin").on("click",function ()
+    {
+        signIn(clientId, clientSecret, redirectUri, scope, code);
+    });
+
+    $("#btnLogout").on("click",function ()
+    {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("expires_in");
+        window.location="index.html";
+    });
+
+    //Scegli il file da caricare
     $("#driveFile").on("change",function ()
     {
         path=$(this).val();
@@ -81,36 +138,28 @@ $(document).ready(function ()
         }
     });
 
-    //Upload file
+    //Carica il file su Drive
     $("#uploadFile").on("click",function ()
     {
-        if(localStorage.getItem("accessToken")==null)
+        if($("#driveFile").val()!="")
         {
-            signIn(clientId, clientSecret, redirectUri, scope, code);
+            let file = $("#driveFile")[0].files[0];
+            let upload = new Upload(file).doUpload();
+            upload.done(function (data)
+            {
+                alert("Caricamento su Google Drive effettuato correttamente");
+                $("label[for=driveFile]").text("Choose your file");
+                path=null;
+                $("#driveFile").val("");
+            });
+            upload.fail(function ()
+            {
+                alert("Errore nel caricamento");
+            });
         }
         else
         {
-            if($("#driveFile").val()!="")
-            {
-                let file = $("#driveFile")[0].files[0];
-                let upload = new Upload(file).doUpload();
-                upload.done(function (data)
-                {
-                    alert("Caricamento su Google Drive effettuato correttamente");
-                    $("label[for=driveFile]").text("Choose your file");
-                    path=null;
-                    $("#driveFile").val("");
-                });
-                upload.fail(function ()
-                {
-                    alert("Errore nel caricamento");
-                });
-            }
-            else
-            {
-                alert("You've to select a file first");
-            }
-
+            alert("You've to select a file first");
         }
     });
 
@@ -165,25 +214,20 @@ $(document).ready(function ()
         }
         chart.update();
     }
-});
-
 
     function getGlobalQuotes(symbol)
     {
-        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=CQB6JNQ90AXL7MEF";
-        $.getJSON(url,
-            function (data) {
-                $("#symbol").text(data["Global Quote"]["01. symbol"]);
+        let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey="+key;
+        let vet=["01. symbol","02. open","03. high","04. low","05. price","06. volume","07. latest trading day","08. previous close","09. change","10. change percent"];
+        $.getJSON(url, function (data)
+            {
                 let globalQuoteData = data["Global Quote"];
-                $("#open").text(globalQuoteData["02. open"]);
-                $("#high").text(globalQuoteData["03. high"]);
-                $("#low").text(globalQuoteData["04. low"]);
-                $("#price").text(globalQuoteData["05. price"]);
-                $("#volume").text(globalQuoteData["06. volume"]);
-                $("#latestTradingDay").text(globalQuoteData["07. latest trading day"]);
-                $("#previousClose").text(globalQuoteData["08. previous close"]);
-                $("#change").text(globalQuoteData["09. change"]);
-                $("#changePercent").text(globalQuoteData["10. change percent"]);
-            }
-        );
+                let _tr=$("<tr>");
+                for(let i=0;i<10;i++)
+                {
+                    $("<td>").html(globalQuoteData[vet[i]]).appendTo(_tr);
+                }
+                _tr.appendTo(_tbody);
+            });
     }
+});

@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
 }
+
 html, body
 {
   background-image: url("img/background.jpg");
@@ -13,18 +14,16 @@ html, body
   overflow-x: hidden;
 }
 
-#navbar
-{
-  width: 100%;
-  background: transparent;
-  padding: 10px 30px;
-}
-
 span
 {
   color: white;
   font-family: Consolas;
   font-size: 1.5em;
+}
+
+button
+{
+  margin-right: 10px;
 }
 
 h1
