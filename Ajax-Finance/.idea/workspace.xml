@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d900f273-a276-4104-88ac-ab29e12297db" name="Default Changelist" comment="Commit: migliorata la grafica della pagina html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,6 +117,7 @@
       <workItem from="1589796830368" duration="3266000" />
       <workItem from="1589805389516" duration="10353000" />
       <workItem from="1589815884672" duration="10232000" />
+      <workItem from="1589834887529" duration="116000" />
     </task>
     <task id="LOCAL-00001" summary="Commit">
       <created>1588514914115</created>

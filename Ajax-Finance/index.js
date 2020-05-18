@@ -79,6 +79,7 @@ $(document).ready(function ()
     {
         if ($(this).val() != "null")
         {
+            _tbody.html("");
             getGlobalQuotes($(this).val());
         }
         else
