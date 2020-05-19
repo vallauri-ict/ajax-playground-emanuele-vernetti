@@ -4,7 +4,7 @@
 In questo esercizio possiamo capire il funzionamento delle chiamate Ajax e in questo caso andremo ad utilizzare un'API fornita da Alpha Vantage (https://www.alphavantage.co/) che ci permette di andare a visualizzare le quotazioni in borsa di varie aziende.
 
 La pagina è divisa in varie sezioni:
-![Cattura](https://user-images.githubusercontent.com/61801458/82309813-e5206780-99c3-11ea-950e-7f7996de5f43.PNG)
+![preview](https://user-images.githubusercontent.com/61801458/82310971-5e6c8a00-99c5-11ea-8af0-52254ba4def8.PNG)
 
 
 
