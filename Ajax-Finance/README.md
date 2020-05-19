@@ -4,6 +4,7 @@
 In questo esercizio possiamo capire il funzionamento delle chiamate Ajax e in questo caso andremo ad utilizzare un'API fornita da Alpha Vantage (https://www.alphavantage.co/) che ci permette di andare a visualizzare le quotazioni in borsa di varie aziende.
 
 La pagina è divisa in varie sezioni:
+![Cattura](https://user-images.githubusercontent.com/61801458/82309813-e5206780-99c3-11ea-950e-7f7996de5f43.PNG)
 
 1- In alto, abbiamo una barra di navigazione creata tramite Bootstrap che ci consente di tornare alla Home e attraverso due pulsanti posizionati sul lato destro di essa, abbiamo la possibilità di effettuare il Log In/ Log Out al nostro account Google, in quanto tramite questa pagina è possibile andare a caricare dei file sul proprio account Google, in particolare nella propria cartella di Google Drive.
 
