@@ -3,6 +3,7 @@
 
 $(document).ready(function ()
 {
+	//#region Puntatori a controlli HTML e variabili globali
 	let _cmbComponenti = $("#cmbComponenti");
 	let vet = ["CPU", "Dissipatori", "Schede madri", "GPU", "RAM", "Alimentatori", "SSD"];
 
@@ -47,6 +48,9 @@ $(document).ready(function ()
 	let min,max;
 	let user, logged;
 
+	//#endregion
+
+	//#region Comandi eseguiti all'avvio
 	vet.sort();
 	for (let i = 0; i < vet.length; i++)
 	{
@@ -104,7 +108,9 @@ $(document).ready(function ()
 				max=parseInt(ui.values[1]);
 			}
 		});
+	//#endregion
 
+	//region Registrazione
 	_registration.on("click",function ()
 	{
 		_txtNomeRegistrazione.removeClass("is-invalid");
@@ -215,7 +221,9 @@ $(document).ready(function ()
 			}
 		}
 	});
+	//#endregion
 
+	//#region Log in
 	_login.off();
 	_login.on("click",function ()
 	{
@@ -322,7 +330,9 @@ $(document).ready(function ()
 			_txtPasswordLogin.prev().addClass("icona-rossa");
 		}
 	});
+	//#endregion
 
+	//#region Cambio Password
 	_key.off();
 	_key.on("click",function ()
 	{
@@ -399,7 +409,9 @@ $(document).ready(function ()
 			}
 		}
 	});
+	//#endregion
 
+	//#region Log out
 	_logout.off();
 	_logout.on("click",function ()
 	{
@@ -423,7 +435,9 @@ $(document).ready(function ()
 			user="";
 		});
 	});
+	//#endregion
 
+	//#region Combobox componenti
 	_cmbComponenti.off();
 	_cmbComponenti.on("change",function ()
 	{
@@ -439,7 +453,9 @@ $(document).ready(function ()
 			visualizzaRisultati(tipo, data);
 		});
 	});
+	//#endregion
 
+	//#region Slider per il prezzo
 	_btnCercaPrezzo.off();
 	_btnCercaPrezzo.on("click",function ()
 	{
@@ -455,30 +471,40 @@ $(document).ready(function ()
 			visualizzaRisultati(tipo,data);
 		});
 	});
+	//#endregion
 
+	//#region Pulsante per svuotare il carrello
 	_btnSvuotaCarrello.off();
 	_btnSvuotaCarrello.on("click",function ()
 	{
 		svuotaCarrello();
 	});
+	//#endregion
 
+	//#region Pulsante per effettuare l'ordine
 	_btnOrdine.on("click",function ()
 	{
 		effettuaOrdine();
 	});
+	//#endregion
 
+	//#region Pulsante per la visualizzazione del carrello
 	$("#menu-toggle").on("click",function ()
 	{
 		caricaCarrello();
 	});
+	//#endregion
 
+	//#region Funzione che svuota il carrello
 	function svuotaCarrello()
 	{
 		carrello.splice(0);
 		caricaCarrello();
 		_lblPrezzoTotale.html("Prezzo totale: 0 \u20AC");
 	}
+	//#endregion
 
+	//#region Funzione che effettua l'ordine
 	function effettuaOrdine()
 	{
 		for(let i=0;i<carrello.length;i++)
@@ -501,7 +527,9 @@ $(document).ready(function ()
 			});
 		}
 	}
+	//#endregion
 
+	//#region Funzione che visualizza i risultati ottenuti dalle query sulle tabelle relative ai vari componenti
 	function visualizzaRisultati(tipo, data)
 	{
 		_risultati.html("");
@@ -567,7 +595,9 @@ $(document).ready(function ()
 
 		}
 	}
+	//#endregion
 
+	//#region Funzione che carica gli elementi nel carrello
 	function caricaCarrello()
 	{
 		_cartElements.html("");
@@ -639,13 +669,17 @@ $(document).ready(function ()
 			_lblPrezzoTotale.html("Prezzo totale: "+tot+" \u20AC");
 		}
 	}
+	//#endregion
 
+	//#region Funzione che cambia la quantità degli articoli nel carrello
 	function cambiaQuantita(sender, pos)
 	{
 		carrello[pos]["Amount"]=parseInt($(sender).val());
 		caricaCarrello();
 	}
+	//#endregion
 
+	//#region Funzione che verifica se un elemento è già presente nel carrello
 	function cercaElemento(product)
 	{
 		let modified=false;
@@ -660,10 +694,13 @@ $(document).ready(function ()
 		}
 		return modified;
 	}
+	//#endregion
 
+	//#region Funzione che elimina un elemento dal carrello
 	function eliminaElemento(pos)
 	{
 		carrello.splice(pos,1);
 		caricaCarrello();
 	}
+	//#endregion
 });
