@@ -578,10 +578,14 @@ $(document).ready(function ()
 			_btnSvuotaCarrello.prop("disabled","disabled");
 			_btnOrdine.prop("disabled","disabled");
 		}
-		else
+		else if(logged)
 		{
 			_btnSvuotaCarrello.removeProp("disabled");
 			_btnOrdine.removeProp("disabled");
+		}
+		else
+		{
+			_btnSvuotaCarrello.removeProp("disabled");
 		}
 		for(let i=0;i<carrello.length;i++)
 		{
