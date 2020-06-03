@@ -46,7 +46,7 @@ $(document).ready(function ()
 	let _btnOrdine=$("#btnOrdine");
 
 	let min,max;
-	let user, logged;
+	let usernameLogged, logged;
 
 	//#endregion
 
@@ -79,7 +79,7 @@ $(document).ready(function ()
 			_btnOrdine.removeProp("disabled");
 		}
 		logged=true;
-		user=data[0]["Username"];
+		usernameLogged=data[0]["Username"];
 	});
 	_verificaLogin.fail(function (jqXHR, text_status, string_error)
 	{
@@ -297,7 +297,7 @@ $(document).ready(function ()
 					_btnOrdine.removeProp("disabled");
 				}
 				logged=true;
-				user=data[0]["Username"];
+				usernameLogged=data[0]["Username"];
 			});
 			_richiestaLogin.fail(function (jqXHR, text_status, string_error)
 			{
@@ -368,7 +368,7 @@ $(document).ready(function ()
 			});
 			let oldPw=CryptoJS.MD5(_txtOldPassword.val()).toString();
 			let newPw=CryptoJS.MD5(_txtNewPassword.val()).toString();
-			let _richiestaCambioPassword=inviaRichiesta("POST","server/cambiaPassword.php",{"username":user,"oldPw":oldPw,"newPw":newPw});
+			let _richiestaCambioPassword=inviaRichiesta("POST","server/cambiaPassword.php",{"username":usernameLogged,"oldPw":oldPw,"newPw":newPw});
 
 			_richiestaCambioPassword.done(function (data)
 			{
@@ -432,7 +432,7 @@ $(document).ready(function ()
 			_btnOrdine.html("Login necessario");
 			_btnOrdine.prop("disabled","disabled");
 			logged=false;
-			user="";
+			usernameLogged="";
 		});
 	});
 	//#endregion

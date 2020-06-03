@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 01, 2020 alle 20:07
+-- Creato il: Giu 03, 2020 alle 09:04
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.4.1
 
@@ -48,9 +48,9 @@ CREATE TABLE `alimentatori` (
 --
 
 INSERT INTO `alimentatori` (`Id`, `Marca`, `Modello`, `Tensione di ingresso`, `Frequenza di ingresso`, `Corrente di ingresso`, `Potenza`, `Prezzo`, `Img`, `Giacenza`) VALUES
-(1, 'Cooler Master', 'Cooler Master V1200+ Platinum', '100 - 240 V', '50 - 60 Hz', '7.5 - 15 A', '1200 W', 299, 'img/alimentatori/coolermasterV1200.jpg', 99),
+(1, 'Cooler Master', 'Cooler Master V1200+ Platinum', '100 - 240 V', '50 - 60 Hz', '7.5 - 15 A', '1200 W', 299, 'img/alimentatori/coolermasterV1200.jpg', 97),
 (2, 'Cooler Master', 'CoolerMaster MWE V2', '100 - 240 V', '50 - 60 Hz', '6 - 10 A', '750 W', 80, 'img/alimentatori/coolermaster750W.jpg', 100),
-(3, 'Cooler Master', 'Cooler Master Elite V3', '200 - 240 V', '47 - 63 Hz', '4 A', '500 W', 44, 'img/alimentatori/coolermasterEliteV3.jpg', 100),
+(3, 'Cooler Master', 'Cooler Master Elite V3', '200 - 240 V', '47 - 63 Hz', '4 A', '500 W', 44, 'img/alimentatori/coolermasterEliteV3.jpg', 99),
 (4, 'Cooler Master', 'Cooler Master MasterWatt Lite 600', '200 - 240 V', '47 - 63 Hz', '3.5 - 5 A', '600 W', 59, 'img/alimentatori/coolermasterMasterwattLite600.jpg', 100);
 
 -- --------------------------------------------------------
@@ -81,14 +81,14 @@ CREATE TABLE `cpu` (
 --
 
 INSERT INTO `cpu` (`Id`, `Marca`, `Modello`, `Generazione`, `Stato`, `Litografia`, `NumCore`, `NumThread`, `FreqBase`, `FreqTurbo`, `Cache`, `Prezzo`, `Img`, `Giacenza`) VALUES
-(1, 'Intel', 'Intel i3-9350KF', 'nona', 'Launched', '14 nm', 4, 4, '4,00 GHz', '4,00 GHz', '8 MB', 225, 'img/cpu/i3.jpg', 98),
+(1, 'Intel', 'Intel i3-9350KF', 'nona', 'Launched', '14 nm', 4, 4, '4,00 GHz', '4,00 GHz', '8 MB', 225, 'img/cpu/i3.jpg', 79),
 (2, 'Intel', 'Intel i3-9350K', 'nona', 'Launched', '14 nm', 4, 4, '4,00 GHz', '4,00 GHz', '8 MB', 175, 'img/cpu/i3.jpg', 0),
-(3, 'Intel', 'Intel i3-9320', 'nona', 'Launched', '14 nm', 4, 4, '3,70 GHz', '4,40 GHz', '8 MB', 150, 'img/cpu/i3.jpg', 99),
-(4, 'Intel', 'Intel i3-9300T', 'nona', 'Launched', '14 nm', 4, 4, '3,20 GHz', '3,80 GHz', '8 MB', 170, 'img/cpu/i3.jpg', 100),
-(5, 'Intel', 'Intel i3-9100', 'nona', 'Launched', '14 nm', 4, 4, '3,70 GHz', '4,30 GHz', '8 MB', 146, 'img/cpu/i3.jpg', 99),
-(6, 'Intel', 'Intel i5-9600T', 'nona', 'Launched', '14 nm', 6, 6, '2,30 GHz', '3,90 GHz', '9 MB', 209, 'img/cpu/i5.jpg', 100),
-(7, 'Intel', 'Intel i5-9600K', 'nona', 'Launched', '14 nm', 6, 6, '3,70 GHz', '4,60 GHz', '9 MB', 225, 'img/cpu/i5.jpg', 99),
-(8, 'Intel', 'Intel i5-9600KF', 'nona', 'Launched', '14 nm', 6, 6, '3,70 GHz', '4,60 GHz', '9 MB', 209, 'img/cpu/i5.jpg', 100),
+(3, 'Intel', 'Intel i3-9320', 'nona', 'Launched', '14 nm', 4, 4, '3,70 GHz', '4,40 GHz', '8 MB', 150, 'img/cpu/i3.jpg', 94),
+(4, 'Intel', 'Intel i3-9300T', 'nona', 'Launched', '14 nm', 4, 4, '3,20 GHz', '3,80 GHz', '8 MB', 170, 'img/cpu/i3.jpg', 98),
+(5, 'Intel', 'Intel i3-9100', 'nona', 'Launched', '14 nm', 4, 4, '3,70 GHz', '4,30 GHz', '8 MB', 146, 'img/cpu/i3.jpg', 85),
+(6, 'Intel', 'Intel i5-9600T', 'nona', 'Launched', '14 nm', 6, 6, '2,30 GHz', '3,90 GHz', '9 MB', 209, 'img/cpu/i5.jpg', 99),
+(7, 'Intel', 'Intel i5-9600K', 'nona', 'Launched', '14 nm', 6, 6, '3,70 GHz', '4,60 GHz', '9 MB', 225, 'img/cpu/i5.jpg', 97),
+(8, 'Intel', 'Intel i5-9600KF', 'nona', 'Launched', '14 nm', 6, 6, '3,70 GHz', '4,60 GHz', '9 MB', 209, 'img/cpu/i5.jpg', 98),
 (9, 'Intel', 'Intel i5-9600', 'nona', 'Launched', '14 nm', 6, 6, '3,10 GHz', '4,60 GHz', '9 MB', 239, 'img/cpu/i5.jpg', 100),
 (10, 'Intel', 'Intel i5-9500', 'nona', 'Launched', '14 nm', 6, 6, '3,00 GHz', '4,40 GHz', '9 MB', 200, 'img/cpu/i5.jpg', 100),
 (11, 'Intel', 'Intel i5-9400', 'nona', 'Launched', '14 nm', 6, 6, '2,90 GHz', '4,10 GHz', '9 MB', 190, 'img/cpu/i5.jpg', 100),
@@ -220,7 +220,7 @@ CREATE TABLE `schedemadri` (
 --
 
 INSERT INTO `schedemadri` (`Id`, `Marca`, `Modello`, `Marca processori supportati`, `Socket`, `Tipo di memoria supportata`, `Numero di slot di memoria`, `Quantita massima di memoria supportata`, `Velocita massima di memoria supportata`, `Forma`, `Numero di connettori USB`, `Numero di connettori PCIe`, `Numero di slot M2`, `Numero di porte VGA`, `Numero di porte DVI`, `Numero di porte HDMI`, `Numero di porte DP`, `Prezzo`, `Img`, `Giacenza`) VALUES
-(1, 'MSI', 'MSI Z390-A PRO', 'Intel', 'LGA 1151', 'DDR4-SDRAM', 4, '64 GB', '4400 MHz', 'ATX', 9, 6, 1, 1, 1, 0, 1, 131, 'img/schedeMadri/MSIZ390-APRO.jpg', 99);
+(1, 'MSI', 'MSI Z390-A PRO', 'Intel', 'LGA 1151', 'DDR4-SDRAM', 4, '64 GB', '4400 MHz', 'ATX', 9, 6, 1, 1, 1, 0, 1, 131, 'img/schedeMadri/MSIZ390-APRO.jpg', 85);
 
 -- --------------------------------------------------------
 
@@ -253,10 +253,10 @@ INSERT INTO `ssd` (`Id`, `Marca`, `Modello`, `Capacita`, `Connettore`, `Velocita
 (5, 'SanDisk', 'SanDisk Ultra 3D SSD 4TB', '4 TB (8192 GB)', 'SATA', '550 MB/s', '525 MB/s', 400, 'img/ssd/sandiskUltra.jpg', 100),
 (6, 'SanDisk', 'SanDisk EXTREME PRO M.2 500GB', '500 GB', 'M.2', '3400 MB/s', '2500 MB/s', 130, 'img/ssd/sandiskExtremeProM2500GB.jpg', 100),
 (7, 'SanDisk', 'SanDisk EXTREME PRO M.2 1TB', '1 TB (1024 GB)', 'M.2', '3400 MB/s', '2500 MB/s', 160, 'img/ssd/sandiskExtremeProM21TB.jpg', 100),
-(8, 'SanDisk', 'SanDisk EXTREME PRO M.2 2TB', '2 TB (2048 GB)', 'M.2', '3400 MB/s', '2500 MB/s', 475, 'img/ssd/sandiskExtremeProM22TB.jpg', 100),
+(8, 'SanDisk', 'SanDisk EXTREME PRO M.2 2TB', '2 TB (2048 GB)', 'M.2', '3400 MB/s', '2500 MB/s', 475, 'img/ssd/sandiskExtremeProM22TB.jpg', 96),
 (9, 'Kingston', 'Kingston A400 240GB', '240 GB', 'SATA', '500 MB/s', '450 MB/s', 40, 'img/ssd/kingstonA400.png', 100),
 (10, 'Kingston', 'Kingston A400 960GB', '960 GB', 'SATA', '500 MB/s', '450 MB/s', 110, 'img/ssd/kingstonA400.png', 100),
-(11, 'Kingston', 'Kingston A400 960GB', '960 GB', 'M.2', '500 MB/s', '320 MB/s', 29, 'img/ssd/kingstonA400M.2.jpg', 100);
+(11, 'Kingston', 'Kingston A400 960GB M.2', '960 GB', 'M.2', '500 MB/s', '320 MB/s', 189, 'img/ssd/kingstonA400M.2.jpg', 100);
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,11 @@ INSERT INTO `ssd` (`Id`, `Marca`, `Modello`, `Capacita`, `Connettore`, `Velocita
 --
 
 CREATE TABLE `utenti` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
+  `Nome` varchar(255) NOT NULL,
+  `Cognome` varchar(255) NOT NULL,
+  `Mail` varchar(255) NOT NULL,
+  `Telefono` varchar(255) NOT NULL,
   `Username` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -274,8 +278,11 @@ CREATE TABLE `utenti` (
 -- Dump dei dati per la tabella `utenti`
 --
 
-INSERT INTO `utenti` (`id`, `Username`, `Password`) VALUES
-(1, 'user', '5f4dcc3b5aa765d61d8327deb882cf99');
+INSERT INTO `utenti` (`Id`, `Nome`, `Cognome`, `Mail`, `Telefono`, `Username`, `Password`) VALUES
+(1, 'Emanuele', 'Vernetti', 'vernetti.emanuele@gmail.com', '3407153802', 'emanuele_vernetti', '5f4dcc3b5aa765d61d8327deb882cf99'),
+(2, 'Mario', 'Rossi', 'mario.rossi@gmail.com', '3159856802', 'mario_rossi', '5f4dcc3b5aa765d61d8327deb882cf99'),
+(3, 'Guido', 'Bianchi', 'guido.bianchi@gmail.com', '3251458930', 'guido_bianchi', '5f4dcc3b5aa765d61d8327deb882cf99'),
+(4, 'Marco', 'Verdi', 'marco.verdi@gmail.com', '3215874580', 'marco_verdi', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 --
 -- Indici per le tabelle scaricate
@@ -327,7 +334,7 @@ ALTER TABLE `ssd`
 -- Indici per le tabelle `utenti`
 --
 ALTER TABLE `utenti`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -379,7 +386,7 @@ ALTER TABLE `ssd`
 -- AUTO_INCREMENT per la tabella `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
