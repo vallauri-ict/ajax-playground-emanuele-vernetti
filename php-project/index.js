@@ -1,5 +1,6 @@
 "use strict";
 //Emanuele Vernetti
+//Progetto PHP
 
 $(document).ready(function ()
 {
