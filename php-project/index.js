@@ -33,6 +33,7 @@ $(document).ready(function ()
 	let _btnCambiaPassword=$("#btnCambiaPassword");
 	let _alertChangePasswordOK=$("#alertChangePasswordOK");
 	let _alertChangePasswordNOK=$("#alertChangePasswordNOK");
+	let _alertSamePasswords=$("#alertSamePasswords");
 	let _txtOldPassword=$("#txtOldPassword");
 	let _txtNewPassword=$("#txtNewPassword");
 
@@ -349,12 +350,15 @@ $(document).ready(function ()
 		_alertChangePasswordNOK.css({
 			"display":"none"
 		});
+		_alertSamePasswords.css({
+			"display":"none"
+		});
 	});
 
 	_btnCambiaPassword.off();
 	_btnCambiaPassword.on("click",function ()
 	{
-		if((_txtOldPassword.val()!="") && (_txtNewPassword.val()!=""))
+		if((_txtOldPassword.val()!="") && (_txtNewPassword.val()!="") && (_txtOldPassword.val()!=_txtNewPassword.val()))
 		{
 			_spanPassword.css({
 				"display":"inline-block"
@@ -365,6 +369,9 @@ $(document).ready(function ()
 				"display":"none"
 			});
 			_alertChangePasswordNOK.css({
+				"display":"none"
+			});
+			_alertSamePasswords.css({
 				"display":"none"
 			});
 			let oldPw=CryptoJS.MD5(_txtOldPassword.val()).toString();
@@ -405,6 +412,16 @@ $(document).ready(function ()
 			}
 			if(_txtNewPassword.val()=="")
 			{
+				_txtNewPassword.addClass("is-invalid");
+				_txtNewPassword.prev().addClass("icona-rossa");
+			}
+			if(_txtOldPassword.val()==_txtNewPassword.val())
+			{
+				_alertSamePasswords.css({
+					"display":"block"
+				});
+				_txtOldPassword.addClass("is-invalid");
+				_txtOldPassword.prev().addClass("icona-rossa");
 				_txtNewPassword.addClass("is-invalid");
 				_txtNewPassword.prev().addClass("icona-rossa");
 			}
