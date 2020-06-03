@@ -4,7 +4,7 @@
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-		// 1. controllo parametri
+		// 1. Controllo parametri
 		if(!isset($_POST["username"]))
 		{
 			http_response_code(400);
@@ -21,13 +21,13 @@
             die("Parametro mancante: newPw");
         }
 
-		// 2. connessione
+		// 2. Connessione
 		$con = _connection("emanuelevernetti_progettophp");
 		$user = $con->real_escape_string($_POST["username"]);
 		$oldPw = $con->real_escape_string($_POST["oldPw"]);
         $newPw = $con->real_escape_string($_POST["newPw"]);
 		
-		// 3. query
+		// 3. Query
         $sql = "SELECT * FROM utenti WHERE Username='$user' AND Password='$oldPw'";
         $data= _eseguiQuery($con, $sql);
         if(count($data)!=0)
@@ -43,7 +43,7 @@
             echo($data);
         }
 
-		// 5. close
+		// 4. Close
 		$con->close();		
 	}
 ?>

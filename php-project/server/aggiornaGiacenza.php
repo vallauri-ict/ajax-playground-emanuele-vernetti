@@ -4,7 +4,7 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        // 1. controllo parametri
+        // 1. Controllo parametri
         if(!isset($_POST["type"]))
         {
             http_response_code(400);
@@ -22,19 +22,19 @@
         }
 
 
-        // 2. connessione
+        // 2. Connessione
         $con = _connection("emanuelevernetti_progettophp");
         $table = $con->real_escape_string($_POST["type"]);
         $modello = $con->real_escape_string($_POST["modello"]);
         $amount=$con->real_escape_string($_POST["amount"]);
 
-        // 3. query
+        // 3. Query
         $sql = "UPDATE $table SET Giacenza=Giacenza-$amount WHERE Modello='$modello'";
         $data= _eseguiQuery($con, $sql);
         $data=json_encode($data);
         echo($data);
 
-        // 4. close
+        // 4. Close
         $con->close();
     }
 ?>

@@ -4,7 +4,7 @@
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
-		// 1. controllo parametri
+		// 1. Controllo parametri
         if(!isset($_POST["nome"]))
         {
             http_response_code(400);
@@ -36,7 +36,7 @@
 			die("parametro mancante: password");
 		}
 
-		// 2. connessione
+		// 2. Connessione
 		$con = _connection("emanuelevernetti_progettophp");
 
 		$nome=$con->real_escape_string($_POST["nome"]);
@@ -46,7 +46,7 @@
 		$user = $con->real_escape_string($_POST["username"]);
 		$password = $con->real_escape_string($_POST["password"]);
 		
-		// 3. query
+		// 3. Query
 		$sql = "SELECT * FROM utenti where Username='$user';";
 		$data= _eseguiQuery($con, $sql);
 		if(count($data)==0)
@@ -61,7 +61,7 @@
 			die("Username già esistente");
 		}
 
-		// 4. close
+		// 4. Close
 		$con->close();		
 	}
 ?>
