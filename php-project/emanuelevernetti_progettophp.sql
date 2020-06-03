@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 03, 2020 alle 15:33
+-- Creato il: Giu 03, 2020 alle 18:33
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.4.1
 
@@ -85,7 +85,7 @@ INSERT INTO `cpu` (`Id`, `Marca`, `Modello`, `Generazione`, `Stato`, `Litografia
 (2, 'Intel', 'Intel i3-9350K', 'nona', 'Launched', '14 nm', 4, 4, '4,00 GHz', '4,00 GHz', '8 MB', 175, 'img/cpu/i3.jpg', 0),
 (3, 'Intel', 'Intel i3-9320', 'nona', 'Launched', '14 nm', 4, 4, '3,70 GHz', '4,40 GHz', '8 MB', 150, 'img/cpu/i3.jpg', 93),
 (4, 'Intel', 'Intel i3-9300T', 'nona', 'Launched', '14 nm', 4, 4, '3,20 GHz', '3,80 GHz', '8 MB', 170, 'img/cpu/i3.jpg', 96),
-(5, 'Intel', 'Intel i3-9100', 'nona', 'Launched', '14 nm', 4, 4, '3,70 GHz', '4,30 GHz', '8 MB', 146, 'img/cpu/i3.jpg', 80),
+(5, 'Intel', 'Intel i3-9100', 'nona', 'Launched', '14 nm', 4, 4, '3,70 GHz', '4,30 GHz', '8 MB', 146, 'img/cpu/i3.jpg', 79),
 (6, 'Intel', 'Intel i5-9600T', 'nona', 'Launched', '14 nm', 6, 6, '2,30 GHz', '3,90 GHz', '9 MB', 209, 'img/cpu/i5.jpg', 99),
 (7, 'Intel', 'Intel i5-9600K', 'nona', 'Launched', '14 nm', 6, 6, '3,70 GHz', '4,60 GHz', '9 MB', 225, 'img/cpu/i5.jpg', 96),
 (8, 'Intel', 'Intel i5-9600KF', 'nona', 'Launched', '14 nm', 6, 6, '3,70 GHz', '4,60 GHz', '9 MB', 209, 'img/cpu/i5.jpg', 98),
@@ -119,8 +119,8 @@ CREATE TABLE `dissipatori` (
 --
 
 INSERT INTO `dissipatori` (`Id`, `Marca`, `Modello`, `Socket supportati`, `Prezzo`, `Img`, `Giacenza`) VALUES
-(1, 'Cooler Master', 'Cooler Master MASTERAIR MA410P', 'Intel LGA 2066-2011-1151-1150-1155', 36, 'img/dissipatori/CoolerMasterMA410P.jpg', 99),
-(2, 'Cooler Master', 'Cooler Master MasterAir MA410M', 'Intel LGA 2066-2011-1151-1150-1155', 57, 'img/dissipatori/CoolerMasterMA410M.jpg', 99),
+(1, 'Cooler Master', 'Cooler Master MASTERAIR MA410P', 'Intel LGA 2066-2011-1151-1150-1155', 36, 'img/dissipatori/CoolerMasterMA410P.jpg', 96),
+(2, 'Cooler Master', 'Cooler Master MasterAir MA410M', 'Intel LGA 2066-2011-1151-1150-1155', 57, 'img/dissipatori/CoolerMasterMA410M.jpg', 98),
 (3, 'Cooler Master', 'Cooler Master Master Air Maker 8', 'Presa elettrica AM2+, Presa elettrica AM3, Socket AM3+, Socket FM1, Socket FM2, Socket FM2+, LGA 1151 (Presa H4), LGA 2011-v3 (Socket R)', 127, 'img/dissipatori/CoolerMasterMasterAirMaker8.jpg', 99);
 
 -- --------------------------------------------------------
